@@ -1,0 +1,52 @@
+.Buscar {
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+
+
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+        margin-bottom: 50px;
+        font-size: 40px;
+        background-color: rgba(0, 0, 0, 0.7);
+        -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 6px 7px 12px rgba(39, 61, 255, 0);
+        box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 6px 7px 12px rgba(39, 61, 255, 0);
+        opacity: 0.8;
+
+        .title {
+            color: white;
+            font-weight: bold;
+        }
+    }
+
+    .camera {
+        display: flex;
+        flex: 2;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #000000;
+
+        .frame {
+            display: flex;
+            padding: 50px;
+
+            .cameraIcon {
+                color: white;
+
+
+            }
+
+        }
+    }
+
+    .formulario {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+}
