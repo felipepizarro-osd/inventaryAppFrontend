@@ -1,4 +1,4 @@
-import React, {Component } from 'react';
+import React, {useEffect, useState } from 'react';
 import "./Home.scss"
 import Sidebar from '../../components/sidebar/sidebar'
 import Navbar from '../../components/navbar/navbar'
@@ -12,38 +12,36 @@ import Grid from '@mui/material/Grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Edit from '@mui/icons-material/Edit'
 import IconButton from '@mui/material/IconButton'
+//import { render } from 'react-dom';
 
+function useDatos() {
+  const [products, setProducts] = useState([]);
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [],
-    };
-  }
+  useEffect(() => {
+    fetch("http://localhost:4000/api/products")
+    .then((res) => {
+      if(res.ok) return res.json();
+    })
+    .then((jsonRes) => setProducts(jsonRes));
+  }, [])
 
-  componentDidMount() {
-    this.fetchProducts();
-  }
+  return products;
+}
 
-  fetchProducts() {
-    axios.get("http://localhost:4000/api/products").then((response) => {
-      console.log(response.data);
-      this.setState({ products: response.data });
+function deleteProducts(sku){
+  if(window.confirm('Desea borrar este producto?')){
+
+    axios.delete(`http://localhost:4000/api/products/:${sku}`).then((response) => {
+      console.log(sku);
     });
   }
+}
 
-  deleteProducts(sku){
-    
-    if(window.confirm('Desea borrar este producto?')){
-      axios.delete(`http://localhost:4000/api/products/${sku}`).then((response) => {
-        console.log(sku);
-        this.fetchProducts();
-      });
-   }
-  }
-  render() {
-    return (
+export default function Home() {
+  
+  const render = useDatos()
+  
+  return (
       <div className="home">
         <Sidebar />
         <div className="homeConteiner">
@@ -75,7 +73,7 @@ class Home extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.products.map((products) => {
+                  {render.map((products) => {
                     return (
                       <tr key={products.Sku}>
                         <td>{products.Sku}</td>
@@ -87,7 +85,7 @@ class Home extends Component {
                         <td>{products.Unidad}</td>
 
                         <td>
-                          <IconButton variant='outlined' aria-label="delete" onClick={() => this.deleteProducts(products.Sku)}>
+                          <IconButton variant='outlined' aria-label="delete" onClick={() => deleteProducts(products.Sku)}>
                             <DeleteIcon />
                           </IconButton>
                           <IconButton variant='outlined' aria-label="edit" >
@@ -104,7 +102,4 @@ class Home extends Component {
         </div>
       </div>
     );
-  }
 }
-
-export default Home;
