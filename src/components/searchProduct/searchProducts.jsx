@@ -1,12 +1,13 @@
 import React from 'react'
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 
 
 import './searchProducts.scss'
+
+
 function searchProducts() {
     return (
         <div className='Buscar'>
@@ -22,17 +23,18 @@ function searchProducts() {
                         Buscar Producto por QR
                     </h4>
                     <FormControl fullWidth sx={{ m: 0.5 }}>
-                        <InputLabel htmlFor="outlined-adornment-amount">SKU del Producto</InputLabel>
+                        <InputLabel className='input' htmlFor="outlined-adornment-amount">SKU del Producto</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-amount"
                             style={{
                                 borderRadius: '20px',
                                 width: '100%',
-                                marginBottom: '20px'
-
+                                marginBottom: '20px',
+                                backgroundColor:'#1B5A74',
+                                borderColor:"white"
                                 
                             }}
-                            startAdornment={<InputAdornment position="start"></InputAdornment>}
+                            color="success"
                             label="Sku del Producto"
                         />
                     </FormControl> 

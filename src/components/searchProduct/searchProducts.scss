@@ -1,17 +1,22 @@
 .Buscar {
-    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
-    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    
+    background-image: url("../img/backgroundHome.jpg");
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    min-height: 100vh;
+    
+    
 
     .top {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
+        width: 80%;
         padding: 50px;
         margin-bottom: 50px;
         font-size: 40px;
@@ -33,9 +38,9 @@
         padding: 10px;
         border-radius: 15px;
         width: 1200px;
-        background: blue;
+        
         .info{
-            background-color: #25799D;
+            
             border-radius: 15px;
             flex: 0 1 70%;
             padding: 40px;
@@ -48,11 +53,16 @@
                 text-align: center;
                 margin-bottom: 20px;
             }
+
             .bton{
                 display: flex;
                 align-items: center;
                 border-radius: 20px;
 
+            }
+            .input{
+                color: white;
+                font-weight: 600;
             }
             Button{
                 background-color:#1B5A74;
@@ -63,6 +73,7 @@
 
             }
 
+            
 
         }
     }
