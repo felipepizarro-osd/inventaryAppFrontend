@@ -2,6 +2,10 @@
     -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 
     .top {
@@ -25,8 +29,41 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        .contenido{
-            color: #000000;
+        overflow: hidden;
+        padding: 10px;
+        border-radius: 15px;
+        width: 1200px;
+        background: blue;
+        .info{
+            background-color: #25799D;
+            border-radius: 15px;
+            flex: 0 1 70%;
+            padding: 40px;
+            color: white;
+            h4{
+                font-size: 3rem;
+                font-weight: 500;
+                background-color:#1B5A74;
+                border-radius: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .bton{
+                display: flex;
+                align-items: center;
+                border-radius: 20px;
+
+            }
+            Button{
+                background-color:#1B5A74;
+                border-radius: 15px;
+                width: 100%;
+                text-align: center;
+
+
+            }
+
+
         }
     }
 

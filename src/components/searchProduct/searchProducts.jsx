@@ -1,10 +1,11 @@
 import React from 'react'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
+
 import './searchProducts.scss'
 function searchProducts() {
     return (
@@ -16,23 +17,40 @@ function searchProducts() {
             </div>
 
             <div className='container'>
-                <Card sx={{ maxWidth: 600 }}>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image="/static/images/cards/contemplative-reptile.jpg"
-                        alt="green iguana"
-                    />
-                    <CardContent className='contenido'>
- 
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">Share</Button>
-                        <Button size="small">Learn More</Button>
-                    </CardActions>
-                </Card>
+                <div className='info'>
+                    <h4>
+                        Buscar Producto por QR
+                    </h4>
+                    <FormControl fullWidth sx={{ m: 0.5 }}>
+                        <InputLabel htmlFor="outlined-adornment-amount">SKU del Producto</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-amount"
+                            style={{
+                                borderRadius: '20px',
+                                width: '100%',
+                                marginBottom: '20px'
+
+                                
+                            }}
+                            startAdornment={<InputAdornment position="start"></InputAdornment>}
+                            label="Sku del Producto"
+                        />
+                    </FormControl> 
+                    <div className='bton'>
+                        <Button size="large" variant="contained">Buscar</Button>
+                    </div>
+                                       
+                    <div className='social Media'>
+                        <a href='/' className='icon-circle'>
+                            <i className='icon'></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
+            <form>
+
+            </form>
+        </div >
     )
 }
 
