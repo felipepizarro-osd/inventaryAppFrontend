@@ -21,32 +21,13 @@
             font-weight: bold;
         }
     }
-
-    .camera {
-        display: flex;
-        flex: 2;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #000000;
-
-        .frame {
-            display: flex;
-            padding: 50px;
-
-            .cameraIcon {
-                color: white;
-
-
-            }
-
-        }
-    }
-
-    .formulario {
+    .container{
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .contenido{
+            color: #000000;
+        }
     }
 
 }
