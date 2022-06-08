@@ -22,6 +22,7 @@ function SearchProducts() {
     };
 
     const [product, setProduct] = useState([]);
+    
     const searchProduct = (sku) => {
         console.log(sku)
         axios.get(`http://localhost:4000/api/products/${sku}`).then((response) => {
@@ -29,13 +30,13 @@ function SearchProducts() {
             setProduct(response.data);
         });
     }
-    const [dato, setDato] = useState({ sku: '' })
+    const [dato, setDato] = useState({sku: ''})
 
     const handleChange = (event) => {
         console.log(event.target.value)
         setDato({
             ...dato,
-            [event.target.name]: [event.target.value]
+            [event.target.name] : [event.target.value]
         })
 
     };
@@ -119,7 +120,7 @@ function SearchProducts() {
                         <FormControl fullWidth sx={{ m: 0.5 }}>
                             <InputLabel className='input' htmlFor="outlined-adornment-amount">SKU del Producto</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-amount"
+                                //id="outlined-adornment-amount"
                                 style={{
                                     borderRadius: '20px',
                                     width: '100%',
@@ -132,6 +133,7 @@ function SearchProducts() {
                                 label="Sku del Producto"
                                 onChange={handleChange}
                                 name='sku'
+                                type='text'
                             />
                         </FormControl>
                         <div className='bton'>
