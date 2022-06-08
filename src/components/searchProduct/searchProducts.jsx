@@ -140,9 +140,9 @@ function SearchProducts() {
                             <Button type='submit' size="large" variant="contained" onClick={handleClickOpen}>Buscar</Button>
                         </div>
                     </form>
-                    {dato.sku[0] !== product.Sku ||
+                    {dato.sku[0] === product.Sku &&
                         <Modal open={open} onClose={handleClickOpen}>{body}</Modal>
-                    }{dato.sku[0] === product.Sku || <Modal open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
+                    }{dato.sku[0] !== product.Sku && <Modal open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
                 </div>
             </div>
 
