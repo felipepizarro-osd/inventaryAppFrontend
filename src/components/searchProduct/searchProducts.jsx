@@ -3,6 +3,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import './searchProducts.scss'
 import axios from 'axios';
 import { Modal } from '@mui/material';
+import QRCode from 'react-qr-code';
 //import { flexbox } from '@mui/system';
 const tab = '\u00A0'
 
@@ -63,30 +64,37 @@ export default function SearchProducts() {
 
     }
     const body=(
-      <div style={useStyles}>
-        <div align='left'>
+      <div className='body' style={useStyles}>
+        
+        <div style={{display:'flex', flexDirection: 'column'}}>
           <h2>Producto buscado</h2>
-          <p style={prodStyles}>Sku: </p>
-          <p style={colorStyles}>{product.Sku}</p>
-        
-          <p style={prodStyles}>Nombre: </p>
-          <p style={colorStyles}>{product.Nombre}</p>
           
-          <p style={prodStyles}>Nombre de servicio: </p>
-          <p style={colorStyles}>{product.Nombre_Servicio}</p>
+          <div >
+            <QRCode value={product.Sku}/>
+          </div>
 
-          <p style={prodStyles}>Part number: </p>
-          <p style={colorStyles}>{product.Part_Number}</p>
+          <div >
+            <p style={prodStyles}>Sku: </p>
+            <p style={colorStyles}>{product.Sku}</p>
           
-          <p style={prodStyles}>Stock: </p>
-          <p style={colorStyles}>{product.Stock}</p>
-          
-          <p style={prodStyles}>Stock minimo: </p>
-          <p style={colorStyles}>{product.Stock_min}</p>
- 
-          <p style={prodStyles}>Unidad: </p>
-          <p style={colorStyles}>{product.Unidad}</p>
-        
+            <p style={prodStyles}>Nombre: </p>
+            <p style={colorStyles}>{product.Nombre}</p>
+            
+            <p style={prodStyles}>Nombre de servicio: </p>
+            <p style={colorStyles}>{product.Nombre_Servicio}</p>
+
+            <p style={prodStyles}>Part number: </p>
+            <p style={colorStyles}>{product.Part_Number}</p>
+            
+            <p style={prodStyles}>Stock: </p>
+            <p style={colorStyles}>{product.Stock}</p>
+            
+            <p style={prodStyles}>Stock minimo: </p>
+            <p style={colorStyles}>{product.Stock_min}</p>
+  
+            <p style={prodStyles}>Unidad: </p>
+            <p style={colorStyles}>{product.Unidad}</p>
+          </div>
         <div style={{padding:'10px'}}>
           <button onClick={handleClose}> cerrar</button>
         </div>
@@ -132,7 +140,7 @@ export default function SearchProducts() {
             
             </form>
             { dato.sku[0] !== product.Sku ||
-              <Modal  open={open} onClose={handleClickOpen}>{body}</Modal>
+              <Modal  classname='modal' open={open} onClose={handleClickOpen}>{body}</Modal>
             }{ dato.sku[0] === product.Sku || <Modal  open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
           </div>
       </div>
