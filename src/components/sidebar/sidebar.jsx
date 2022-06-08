@@ -9,18 +9,22 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
+import logo from '../../assets/Logo.png'
+import { Grid } from '@mui/material';
+const tab = '\u00A0'
+
 function sidebar() {
   return (
     <div className='sidebar'>
       <div className='top'>
-        <ViewHeadlineIcon className='icon' />
+        <ViewHeadlineIcon className='icon' />{tab}
         <span className='logo'>
-
-          C19 Software Inventory
+         <img src={logo} alt="logo" height={30} width = {70} />{tab}Software{tab}Inventory
         </span>
       </div>
       <hr />
       <div className='center'>
+        <Grid alignItems="stretch">
         <ul>
           <p className='title'>MAIN</p>
           <li><DashboardIcon className='Icons' /><span>Dashboard</span></li>
@@ -33,6 +37,7 @@ function sidebar() {
 
 
         </ul>
+        </Grid>
       </div>
       <div className='bottom'>
         <div className='colorOption'></div>
