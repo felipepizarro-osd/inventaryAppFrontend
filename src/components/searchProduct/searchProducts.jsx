@@ -11,7 +11,7 @@ export default function SearchProducts() {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
-      if(dato.sku[0] === ''){
+      if(dato.sku[0] === '' || dato.sku[0]=== undefined){
         setOpen(false);
       }else{setOpen(true)}
       
@@ -140,7 +140,7 @@ export default function SearchProducts() {
             
             </form>
             { dato.sku[0] === product.Sku &&
-              <Modal  classname='modal' open={open} onClose={handleClickOpen}>{body}</Modal>
+              <Modal  className='modal' open={open} onClose={handleClickOpen}>{body}</Modal>
             }{ dato.sku[0] !== product.Sku && <Modal  open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
           </div>
       </div>
