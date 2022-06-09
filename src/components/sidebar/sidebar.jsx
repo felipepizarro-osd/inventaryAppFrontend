@@ -9,7 +9,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
-import logo from '../../assets/Logo.png'
+import logo from '..//img/Logo.png'
 import { Grid } from '@mui/material';
 const tab = '\u00A0'
 
