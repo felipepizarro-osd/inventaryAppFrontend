@@ -139,9 +139,9 @@ export default function SearchProducts() {
                 </button>
             
             </form>
-            { dato.sku[0] !== product.Sku ||
+            { dato.sku[0] === product.Sku &&
               <Modal  classname='modal' open={open} onClose={handleClickOpen}>{body}</Modal>
-            }{ dato.sku[0] === product.Sku || <Modal  open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
+            }{ dato.sku[0] !== product.Sku && <Modal  open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
           </div>
       </div>
     )}
