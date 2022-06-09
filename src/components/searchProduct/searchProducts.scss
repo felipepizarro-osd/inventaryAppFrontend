@@ -1,12 +1,23 @@
 .Buscar {
-    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
-    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+    max-width: 100%;
+    height: auto;
+    
+    background-image: url("../img/backgroundHome.jpg");
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+    
 
     .top {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
+        width: 80%;
         padding: 50px;
         margin-bottom: 50px;
         font-size: 40px;
@@ -20,35 +31,52 @@
             font-weight: bold;
         }
     }
-
-    .camera {
+    .container{
         display: flex;
-        flex: 2;
         align-items: center;
-        justify-content: space-between;
-        background-color: #000000;
+        justify-content: center;
+        overflow: hidden;
+        padding: 10px;
+        border-radius: 15px;
+        width: 1200px;
+        
+        .info{
+            
+            border-radius: 15px;
+            flex: 0 1 70%;
+            padding: 40px;
+            color: white;
+            h4{
+                font-size: 3rem;
+                font-weight: 500;
+                background-color:#1B5A74;
+                border-radius: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
 
-        .frame {
-            display: flex;
-            padding: 50px;
+            .bton{
+                display: flex;
+                align-items: center;
+                border-radius: 20px;
 
-            .cameraIcon {
+            }
+            .input{
                 color: white;
+                font-weight: 600;
+            }
+            Button{
+                background-color:#1B5A74;
+                border-radius: 15px;
+                width: 100%;
+                text-align: center;
 
 
             }
 
+            
+
         }
     }
-
-    .formulario {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    }
-     
-                          
-        
 
 }
