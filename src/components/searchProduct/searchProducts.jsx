@@ -2,8 +2,9 @@ import React, {useState } from 'react';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import './searchProducts.scss'
 import axios from 'axios';
-import { Modal } from '@mui/material';
+import { Grid, IconButton, Modal } from '@mui/material';
 import QRCode from 'react-qr-code';
+import CloseIcon from '@mui/icons-material/Close';
 //import { flexbox } from '@mui/system';
 const tab = '\u00A0'
 
@@ -56,24 +57,29 @@ export default function SearchProducts() {
           
       }
     const prodStyles={
-      borderBottom: '6px', padding:'4px'
+      borderBottom: '6px', padding:'4px',
     }
     const colorStyles={
       backgroundColor:'#1b5a74',
       color:'white',
-
     }
     const body=(
       <div className='body' style={useStyles}>
-        
-        <div style={{display:'flex', flexDirection: 'column'}}>
-          <h2>Producto buscado</h2>
-          
-          <div >
+        <Grid container justifyContent="space-between">
+          <Grid item>
+            <h2>Producto buscado</h2>
+          </Grid>
+          <Grid item alignItems="flex-start" style={{transform: 'translate(30%, -20%)'}}>
+            <IconButton size='large' onClick={handleClose}><CloseIcon fontSize="inherit"/> </IconButton>
+          </Grid>
+        </Grid>
+        <Grid container>
+            
+          <Grid item sm style={{display:'block', margin:'auto'}}>
             <QRCode value={product.Sku}/>
-          </div>
+          </Grid>
 
-          <div >
+          <Grid item sm container direction='column' style={{marginLeft:'10px',marginRight:'8px'}}>
             <p style={prodStyles}>Sku: </p>
             <p style={colorStyles}>{product.Sku}</p>
           
@@ -94,11 +100,11 @@ export default function SearchProducts() {
   
             <p style={prodStyles}>Unidad: </p>
             <p style={colorStyles}>{product.Unidad}</p>
-          </div>
-        <div style={{padding:'10px'}}>
-          <button onClick={handleClose}> cerrar</button>
-        </div>
-        </div>
+          </Grid>
+          
+        </Grid>
+            
+            
     </div>
     )
     const bodyAlert=(
@@ -130,7 +136,7 @@ export default function SearchProducts() {
                     type="text"
                     placeholder="SKU del producto"
                     name='sku'    
-                    onChange={handleChange}                                      
+                    onChange={handleChange}
                 />
                 
                 {tab}
@@ -140,8 +146,8 @@ export default function SearchProducts() {
             
             </form>
             { dato.sku[0] === product.Sku &&
-              <Modal  className='modal' open={open} onClose={handleClickOpen}>{body}</Modal>
-            }{ dato.sku[0] !== product.Sku && <Modal  open={open} onClose={handleClickOpen}>{bodyAlert}</Modal>}
+              <Modal  className='modal' open={open} onClose={handleClose}>{body}</Modal>
+            }{ dato.sku[0] !== product.Sku && <Modal  open={open} onClose={handleClose }>{bodyAlert}</Modal>}
           </div>
       </div>
     )}
