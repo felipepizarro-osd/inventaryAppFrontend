@@ -13,7 +13,7 @@ import logo from '..//img/Logo.png'
 import { Grid } from '@mui/material';
 const tab = '\u00A0'
 
-function sidebar() {
+function Sidebar() {
   return (
     <div className='sidebar'>
       <div className='top'>
@@ -29,8 +29,7 @@ function sidebar() {
           <p className='title'>MAIN</p>
           <li><DashboardIcon className='Icons' /><span>Dashboard</span></li>
           <li><SearchIcon className='Icons' /><span>Buscar Producto</span></li>
-          <li><Inventory2Icon className='Icons' /><span>Almacenar producto</span></li>
-          <li><Inventory2Icon className='Icons' /><span>Editar producto</span></li>
+          <li><Inventory2Icon className='Icons' /><span>Almacenar o editar producto</span></li>
           <li><ExitToAppIcon className='Icons' /><span>Retirar Producto</span></li>
           <li><CheckBoxIcon className='Icons' /><span>Revisar stock</span></li>
           <li><AddIcon className='Icons' /><span>Agregar Proveedor</span></li>
@@ -50,4 +49,4 @@ function sidebar() {
   )
 }
 
-export default sidebar
+export default Sidebar
