@@ -1,6 +1,7 @@
 import React from 'react'
 import './navbar.scss'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
 function navbar() {
   return (
     <div className='navbar'>
@@ -9,7 +10,7 @@ function navbar() {
         <div className='items'>
 
           <div className='item'>
-          LOG IN
+          <Link className='item' to="/login"> LOG IN </Link>
           <AccountCircleIcon className='icon'/>
 
           </div>
