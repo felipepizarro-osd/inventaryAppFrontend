@@ -11,6 +11,8 @@ import Scanner from '../scannerQr/Scanner';
 const tab = '\u00A0'
 
 export default function SearchProducts() {
+
+
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -127,7 +129,9 @@ export default function SearchProducts() {
           Camara
           <div className="frame">
             <CameraAltIcon className="cameraIcon" />
-            <Scanner/>
+            <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+              <Scanner/>
+            </Grid>
           </div>
             
         </div>
