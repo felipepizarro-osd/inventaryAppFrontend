@@ -11,9 +11,9 @@ const Home = () => {
   return (
     <div className='home'>
         
-        <Sidebar/>
+        <Sidebar className='sidebar'/>
         <div className='homeConteiner'>
-          <Navbar/>
+          <Navbar className='nav'/>
           <Search/>
         </div>
     </div>

@@ -54,12 +54,16 @@
                     font-size: 18px;
                     color: white;
                 }
-                span{
+                .link{
                     font-size: 13px;
                     font-weight: 600;
-                    color: white;
+                    color: lightgrey;
                     margin-left: 10px;
+                    &:hover{
+                        color: white;
+                    }
                 }
+                
             }
 
         }
@@ -84,4 +88,5 @@
             }
         }
     }
+
 }

@@ -11,6 +11,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
 import logo from '../../assets/Logo.png'
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 const tab = '\u00A0'
 
 function sidebar() {
@@ -29,7 +30,7 @@ function sidebar() {
           <p className='title'>MAIN</p>
           <li><DashboardIcon className='Icons' /><span>Dashboard</span></li>
           <li><SearchIcon className='Icons' /><span>Buscar Producto</span></li>
-          <li><Inventory2Icon className='Icons' /><span>Almacenar o editar producto</span></li>
+          <li><Inventory2Icon className='Icons' /><Link className='link' to="/products">Almacenar o editar producto</Link></li>
           <li><ExitToAppIcon className='Icons' /><span>Retirar Producto</span></li>
           <li><CheckBoxIcon className='Icons' /><span>Revisar stock</span></li>
           <li><AddIcon className='Icons' /><span>Agregar Proveedor</span></li>

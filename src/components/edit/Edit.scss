@@ -1,0 +1,44 @@
+.edit{
+    flex: 4;
+    padding: 20px;
+    .editTitle{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+    .addProduct{
+        width: 80px;
+        border: none;
+        padding: 5px;
+        background-color: #1B5A74;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-size: 16px;
+    }
+    .productContainer{
+        display: flex;
+        margin-top: 20px;
+        .productShow{
+            flex: 1;
+            padding: 20px;
+            -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+            box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+            .title{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+        }
+        .productUpdate{
+            flex: 1;
+            padding: 20px;
+            -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+            box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+            margin-left: 20px;
+        }
+    }
+
+}
