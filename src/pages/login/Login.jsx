@@ -22,9 +22,9 @@ const Login=()=> {
       [name]: value
     })
   }
-  const onSubmit=()=>{
+  const onSubmit=(body)=>{
     console.log(body)
-    axios.post('http://localhost:4000/api/login', body)
+    axios.get(`http://localhost:4000/api/usuarios/${body.rut}`)
     .then(({data})=>{
       console.log(data)
     })
@@ -50,7 +50,7 @@ const Login=()=> {
               <FormGroup>
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
               </FormGroup>
-              <Button type='submit' color='primary' variant='contained' style={btnstyle} fullWidth onClick={()=> onSubmit()} >Sign In</Button>
+              <Button type='submit' color='primary' variant='contained' style={btnstyle} fullWidth onClick={()=> onSubmit(body)} >Sign In</Button>
             </Paper>
         </Grid>
       </div>
