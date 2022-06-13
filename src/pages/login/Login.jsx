@@ -3,7 +3,9 @@ import {Grid, Paper, Avatar, TextField, FormGroup, FormControlLabel, Checkbox, B
 import LockIcon from '@mui/icons-material/Lock';
 import Sidebar from '../../components/sidebar/sidebar'
 import Navbar from '../../components/navbar/navbar'
+import axios from 'axios'
 import "./Login.scss"
+import { FormControlUnstyled } from '@mui/base';
 
 
 const Login=()=> {
@@ -12,6 +14,7 @@ const Login=()=> {
   const btnstyle={margin:'8px 0', backgroundColor: '#EA454C'}
   const usuarioStyle={margin: "10px auto"}
   const  [body,setBody] = useState({rut: '', contrasena: ''})
+  /*
   const handleChange = e => {
     console.log(e.target.value)
     setBody({
@@ -19,8 +22,23 @@ const Login=()=> {
       [e.target.name]: e.target.value
     })
   }
+  */
+  const inputChange = ({target}) =>{
+    const {name, value} = target
+    setBody({
+      ...body,
+      [name]: value
+    })
+  }
   const onSubmit=()=>{
     console.log(body)
+    axios.post('http://localhost:4000/api/login', body)
+    .then(({data})=>{
+      console.log(data)
+    })
+    .catch(({response})=>{
+      FormControlUnstyled.log(response)
+    })
   }
 
   return (
@@ -35,8 +53,8 @@ const Login=()=> {
                 <Avatar style={avatarStyle}> <LockIcon/> </Avatar>
                 <h2>Ingresar</h2>
               </Grid>
-              <TextField label='Rut' placeholder='Enter your rut' fullWidth required name='rut' value={body.nickname} onChange={handleChange} style={usuarioStyle}/>
-              <TextField label='Password' placeholder='Enter password' type='password' fullWidth required name='contrasena' value={body.password} onChange={handleChange}/>
+              <TextField label='Rut' placeholder='Enter your rut' fullWidth required name='rut' value={body.rut} onChange={inputChange} style={usuarioStyle}/>
+              <TextField label='Password' placeholder='Enter password' type='password' fullWidth required name='contrasena' value={body.password} onChange={inputChange}/>
               <FormGroup>
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
               </FormGroup>
