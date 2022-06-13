@@ -14,15 +14,7 @@ const Login=()=> {
   const btnstyle={margin:'8px 0', backgroundColor: '#EA454C'}
   const usuarioStyle={margin: "10px auto"}
   const  [body,setBody] = useState({rut: '', contrasena: ''})
-  /*
-  const handleChange = e => {
-    console.log(e.target.value)
-    setBody({
-      ...body,
-      [e.target.name]: e.target.value
-    })
-  }
-  */
+
   const inputChange = ({target}) =>{
     const {name, value} = target
     setBody({
