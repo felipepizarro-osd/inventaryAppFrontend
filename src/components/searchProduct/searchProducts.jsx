@@ -3,8 +3,10 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import './searchProducts.scss'
 import axios from 'axios';
 import { Grid, IconButton, Modal } from '@mui/material';
-import QRCode from 'react-qr-code';
+import {QRCode} from 'react-qr-svg';
 import CloseIcon from '@mui/icons-material/Close';
+import Scanner from '../scannerQr/Scanner';
+
 //import { flexbox } from '@mui/system';
 const tab = '\u00A0'
 
@@ -22,7 +24,7 @@ export default function SearchProducts() {
       setOpen(false);
     };
     
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({Sku: ''});
     const searchProduct = (sku) => {
         console.log(sku)
         axios.get(`http://localhost:4000/api/products/${sku}`).then((response) => {
@@ -76,7 +78,7 @@ export default function SearchProducts() {
         <Grid container>
             
           <Grid item sm style={{display:'block', margin:'auto'}}>
-            <QRCode value={product.Sku}/>
+            <QRCode value={product.Sku} level={'L'}/>
           </Grid>
 
           <Grid item sm container direction='column' style={{marginLeft:'10px',marginRight:'8px'}}>
@@ -125,7 +127,9 @@ export default function SearchProducts() {
           Camara
           <div className="frame">
             <CameraAltIcon className="cameraIcon" />
+            <Scanner/>
           </div>
+            
         </div>
         <div className="formulario">
             <h1 className="titulo">Buscar Producto por Qr</h1>

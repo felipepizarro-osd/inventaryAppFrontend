@@ -9,10 +9,12 @@ const Home = () => {
   return (
     <div className='home'>
         
-         <Search/>
-        <div className='homeConteiner'>           
+        
+        <section className='homeConteiner'>           
+          <Search/>
           <Sidebar/>
-        </div>
+        </section>
+        
     </div>
   )
 }

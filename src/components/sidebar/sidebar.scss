@@ -70,44 +70,6 @@ main {
   font-size: 1.9rem;
   font-family: sans-serif;
 }
-.nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  padding: 0.5rem 1 0.5rem 1.5rem;
-  height: 100%;
-}
-.nav-logo,
-.nav-link {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  column-gap: 0.6rem;
-  padding: 0.5rem 0 0.5rem 0.7rem;
-}
-.nav-logo {
-  margin-bottom: 1.5rem;
-}
-.nav-logo-icon {
-  font-size: 1.5rem;
-  color: aliceblue;
-  cursor: pointer;
-}
-.nav-logo-name {
-  font-weight: 600;
-  color: aliceblue;
-  list-style: none;
-}
-.nav-link {
-  position: relative;
-  color: aliceblue;
-  transition: 0.5s;
-  margin-bottom: 1rem;
-}
-.nav-link:hover {
-  color: var(--first-color-alt);
-  background-color: rgba(0, 0, 0, 0.1);
-}
 .active {
   color: var(--first-color-alt);
   background-color: rgba(0, 0, 0, 0.1);
