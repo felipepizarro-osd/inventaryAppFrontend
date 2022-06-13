@@ -25,7 +25,7 @@ function navbar() {
           <SearchIcon className="nav-link-icon" />
           <span className="nav-link-name">Buscar Producto</span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="users" className="nav-link">
           <Inventory2Icon className="nav-link-icon" />
           <span className="nav-link-name">
             Almacenar o editar producto

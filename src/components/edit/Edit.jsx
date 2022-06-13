@@ -230,14 +230,15 @@ const Edit = () => {
         <Dialog open={open} onClose={handleClose}>{body}</Dialog>
       </div>
       <div className='productContainer'>
+        <div>
         <MUIDataTable
           title={"Productos"}
           data={products}
           columns={columns}
 
         >
-
         </MUIDataTable>
+        </div>
       </div>
     </div>
   )

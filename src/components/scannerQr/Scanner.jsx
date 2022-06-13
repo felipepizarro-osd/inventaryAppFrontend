@@ -6,6 +6,7 @@ const Scanner = () => {
 
   return (
     <>
+    <div style={{width:'250px'}}>
       <QrReader
         onResult={(result, error) => {
           if (!!result) {
@@ -19,6 +20,7 @@ const Scanner = () => {
         style={{ width: '100%' }}
       />
       <p>{data}</p>
+      </div>
     </>
   );
 };

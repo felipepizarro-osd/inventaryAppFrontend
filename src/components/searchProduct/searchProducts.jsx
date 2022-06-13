@@ -78,7 +78,7 @@ export default function SearchProducts() {
         <Grid container>
             
           <Grid item sm style={{display:'block', margin:'auto'}}>
-            <QRCode value={product.Sku} level={'L'}/>
+            <QRCode value={product.Sku} level={'L'} style={{ width: 250 }}/>
           </Grid>
 
           <Grid item sm container direction='column' style={{marginLeft:'10px',marginRight:'8px'}}>
