@@ -134,9 +134,9 @@ export default function SearchProducts() {
       <div className="container">
         <div className="info">
           <h4>Buscar Producto por QR</h4>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+          <div >
             <Scanner />
-          </Grid>
+          </div>
           <form onSubmit={enviarDato}>
             <FormControl fullWidth sx={{ m: 0.5 }}>
               <InputLabel className="input" htmlFor="outlined-adornment-amount">

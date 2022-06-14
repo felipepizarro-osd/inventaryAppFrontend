@@ -1,0 +1,20 @@
+
+.bton{
+    display: contents;
+    align-items: center;
+    border-radius: 15px;
+    color: aliceblue;
+    margin-bottom: 1rem;
+}
+Button{
+    background-color:#1B5A74;
+    color: aliceblue;
+    border-radius: 15px;
+    width: 100%;
+    text-align: center;
+}
+@media screen and (min-width: 768px) {
+    video{
+        margin-left: auto;
+    }
+}

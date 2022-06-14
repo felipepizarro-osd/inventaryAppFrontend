@@ -1,11 +1,13 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState, useRef } from 'react';
 import { QrReader } from 'react-qr-reader';
 import axios from "axios";
-import { Modal, IconButton, Grid } from "@mui/material";
+import { Modal, IconButton, Grid ,Button} from "@mui/material";
 import { QRCode } from "react-qr-svg";
 import CloseIcon from "@mui/icons-material/Close";
+import "./Scanner.scss";
 
 const Scanner = () => {
+  //Codigo para mostrar la ventana modal del QR
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     if (data.sku[0] === "" || data.sku[0] === undefined) {
@@ -17,14 +19,12 @@ const Scanner = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  //----------------------------------------------
   const [data, setData] = useState({ sku: "" });
   const [boton, setBoton] = useState(false);
 
   const handleBoton = () => {
     setBoton(true);
-    navigator.mediaDevices
-    .getUserMedia({ video: true})
   };
   const handleCloseBoton =  () => {
     setBoton(false);
@@ -110,23 +110,56 @@ const Scanner = () => {
       </Grid>
     </div>
   );
+  const [mystream, setmystream] = useState(false);
+  const [videoswitch, setvideo] = useState(true);
+  const myvideo = useRef(null);
+  
+  useEffect(() => {
+    navigator.mediaDevices
+        .getUserMedia({ video: true})
+        .then((stream) => {
+            myvideo.current.srcObject = stream;
+            myvideo.current.autoplay = true;
+            myvideo.current.muted = false;
+            setmystream(stream);
+        });
+}, []);
+
+const handleVideo = () => {
+    if (videoswitch) {
+        setvideo(false);
+        mystream.getTracks().forEach(function (track) {
+            if (track.readyState === "live" && 
+                track.kind === "video") {
+                track.enabled = false;
+            }
+        });
+    } else {
+        setvideo(true);
+        mystream.getTracks().forEach(function (track) {
+            if (track.readyState === "live" && 
+                track.kind === "video") {
+                track.enabled = true;
+            }
+        });
+    }
+};
   return (
     <>
-    <div style={{width:'250px'}}>
-      <div>
-      <button className="button" onClick={handleBoton}>Activar Camara</button>
-      <button className="button" onClick={handleCloseBoton}>Desactivar Camara</button>
-       </div>
-       {boton === true && <QrReader 
-        delay={300}
-        onResult={(result) => {
-            if (!!result) {
-            setData(result?.text);
-            searchProduct(result?.text);
-          }
-        }}
-        style={{ width: '100%' }}
-      />}
+    <div className="bton">
+        <Button size="large" variant="contained" onClick={handleVideo}>{videoswitch ? "Desactivar camara" : 
+                    "Activar camara"}</Button>
+    </div>
+    <div> 
+       <video ref={myvideo} style={{width: '100%', height:'200px'}}><QrReader 
+          delay={300}
+          onResult={(result) => {
+              if (!!result) {
+              setData(result?.text);
+              searchProduct(result?.text);
+            }
+          }}
+        /></video>
       
       <Modal open={open} onClose={handleClickOpen} >
         {body}

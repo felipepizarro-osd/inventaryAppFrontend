@@ -235,7 +235,6 @@ const Edit = () => {
           title={"Productos"}
           data={products}
           columns={columns}
-
         >
         </MUIDataTable>
         </div>

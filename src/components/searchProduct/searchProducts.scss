@@ -4,6 +4,7 @@
     background-image: url("../img/backgroundHome.jpg");
     padding: 10px;
     display: flex;
+    margin-top: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -31,7 +32,7 @@
         }
     }
     .container{
-        display: flex;
+        display: contents;
         align-items: center;
         justify-content: center;
         overflow: hidden;
