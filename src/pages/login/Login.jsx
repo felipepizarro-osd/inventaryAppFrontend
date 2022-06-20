@@ -26,7 +26,13 @@ const Login=()=> {
     console.log(body)
     axios.get(`http://localhost:4000/api/usuarios/${body.rut}`)
     .then(({data})=>{
-      console.log(data)
+      console.log(data[0]['Contrasena'])
+      if(data[0]['Contrasena'] === body.contrasena){
+        return(
+          console.log('Son iguales')
+        );
+      }
+      console.log(data[0]['Rut'])
     })
     .catch(({response})=>{
       FormControlUnstyled.log(response)
@@ -46,7 +52,7 @@ const Login=()=> {
                 <h2>Ingresar</h2>
               </Grid>
               <TextField label='Rut' placeholder='Enter your rut' fullWidth required name='rut' value={body.rut} onChange={inputChange} style={usuarioStyle}/>
-              <TextField label='Password' placeholder='Enter password' type='password' fullWidth required name='contrasena' value={body.password} onChange={inputChange}/>
+              <TextField label='Password' placeholder='Enter password' type='password' fullWidth required name='contrasena' value={body.contrasena} onChange={inputChange}/>
               <FormGroup>
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
               </FormGroup>
