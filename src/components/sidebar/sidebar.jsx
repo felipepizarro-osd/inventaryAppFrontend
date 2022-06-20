@@ -30,7 +30,7 @@ function sidebar() {
           <p className='title'>MAIN</p>
           <li><DashboardIcon className='Icons' /><span>Dashboard</span></li>
           <li><SearchIcon className='Icons' /><span>Buscar Producto</span></li>
-          <li><Inventory2Icon className='Icons' /><Link className='link' to="/products">Almacenar o editar producto</Link></li>
+          <li><Inventory2Icon className='Icons' /><Link className='link' to="/  products">Almacenar o editar producto</Link></li>
           <li><ExitToAppIcon className='Icons' /><span>Retirar Producto</span></li>
           <li><CheckBoxIcon className='Icons' /><span>Revisar stock</span></li>
           <li><AddIcon className='Icons' /><span>Agregar Proveedor</span></li>
