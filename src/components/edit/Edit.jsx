@@ -4,6 +4,7 @@ import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import { Dialog,DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import { get } from 'react-hook-form';
 /*
 primero modificamos los dialogs para que el cierren y abran y renderizen cosas distintas 
 lo que pasa ahora es que la option de la mui datatable segun el example entregaa value tableMeta and UpdateValue 
@@ -93,7 +94,8 @@ const Edit = () => {
     await axios.put(url+'/'+productObjectSelected.sku,productObjectSelected).then((response) => {
       const data = response.data
       console.log(data);
-      //setProducts(products.concat(data));
+      setProducts(products.concat(data));
+      getData()
       console.log(response.status)
       OpenCloseDialogUpdate()
     })
