@@ -24,7 +24,7 @@ const Edit = () => {
   const [dialogCreate,setDialogCreate] = useState(false)
   const [dialogUpdate,setDialogUpdate] = useState(false)
 
-  const [selectedProduct,setSelectedProduct] = useState([]);
+  
   
   const url = 'http://localhost:4000/api/products';
 
@@ -49,7 +49,9 @@ const Edit = () => {
   const [Stock, setStock] = useState('')
   const [Stock_min, setStockMin] = useState('')
   const [Unidad, setUnidad] = useState('')
-
+  const [Bodega, setBodega] = useState('')
+  const [Modulo, setModulo] = useState('')
+  const [Posicion, setPosicion] = useState('')
 
   const [skuS, setSkuS] = useState('');
   const [NombreS, setNombreS] = useState('');
@@ -58,6 +60,9 @@ const Edit = () => {
   const [StockS, setStockS] = useState('')
   const [Stock_minS, setStockMinS] = useState('')
   const [UnidadS, setUnidadS] = useState('')
+  const [BodegaS, setBodegaS] = useState('')
+  const [ModuloS, setModuloS] = useState('')
+  const [PosicionS, setPosicionS] = useState('')
 
   const productObjectSelected = {
     sku: skuS,
@@ -66,7 +71,10 @@ const Edit = () => {
     Part_Number: Part_NumberS,
     Stock: StockS,
     Stock_min: Stock_minS,
-    Unidad: UnidadS
+    Unidad: UnidadS,
+    Bodega: BodegaS,
+    Modulo: ModuloS,
+    Posicion: PosicionS
 
   }
   const productObject = {
@@ -76,8 +84,10 @@ const Edit = () => {
     Part_Number: Part_Number,
     Stock: Stock,
     Stock_min: Stock_min,
-    Unidad: Unidad
-
+    Unidad: Unidad,
+    Bodega: Bodega,
+    Modulo: Modulo,
+    Posicion: Posicion
   }
   const CreateProduct = async (e) => {
     //handleClose()
@@ -121,6 +131,15 @@ const Edit = () => {
   const handleUnidad = e => {
     setUnidad(e.target.value);
   };
+  const handleBodega = e => {
+    setBodega(e.target.value);
+  };
+  const handleModulo = e => {
+    setModulo(e.target.value);
+  };
+  const handlePosicion = e => {
+    setPosicion(e.target.value);
+  };
 //donde se reciben lso cambios del producto seleccionado para recuperarlos
 const handleChangeSku = e => {
   setSkuS(e.target.value);
@@ -143,7 +162,15 @@ const handleChangeStockMin = e => {
 const handleChangeUnidad = e => {
   setUnidadS(e.target.value);
 };
-
+const handleChangeBodega = e => {
+  setBodegaS(e.target.value);
+};
+const handleChangeModulo = e => {
+  setModuloS(e.target.value);
+};
+const handleChangePosicion = e => {
+  setPosicionS(e.target.value);
+};
   useEffect(() => {
     getData()
   }, [])
@@ -157,7 +184,10 @@ const handleChangeUnidad = e => {
     setPartNumberS(product[3])
     setStockS(product[4])
     setStockMinS(product[5])
-    setUnidadS(product[6])  
+    setUnidadS(product[6])
+    setBodegaS(product[7])  
+    setModuloS(product[8])
+    setPosicionS(product[9])
     console.log(productObjectSelected);
     
     (caso === 'Edit' )&&OpenCloseDialogUpdate()
@@ -195,6 +225,19 @@ const handleChangeUnidad = e => {
       name: "Unidad",
       label: "Unidad"
     },
+    {
+      name: "Bodega",
+      label: "Bodega"
+    },
+    {
+      name: "Modulo",
+      label: "Modulo"
+    },
+    {
+      name: "Posicion",
+      label: "Posicion"
+    },
+
     {
       name: "Edit",
       options: {
@@ -297,6 +340,37 @@ const handleChangeUnidad = e => {
           onChange={handleChangeUnidad}
           value={productObjectSelected.Unidad}
         />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Bodega'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeBodega}
+          value={productObjectSelected.Bodega}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Modulo'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeModulo}
+          value={productObjectSelected.Modulo}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Posicion'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangePosicion}
+          value={productObjectSelected.Posicion}
+        />
+        
       </DialogContent>
           <DialogActions>
           <Button onClick={()=>OpenCloseDialogUpdate()}>Cerrar</Button>
@@ -374,6 +448,34 @@ const handleChangeUnidad = e => {
           variant='standard'
           onChange={handleUnidad}
         />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Bodega'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleBodega}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Modulo'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleModulo}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Posicion'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handlePosicion}
+        />
+        
       </DialogContent>
           <DialogActions>
           <Button onClick={()=>OpenCloseDialog()}>Cerrar</Button>
