@@ -46,7 +46,7 @@ main {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -30%;
+  left: 0;
   height: 100%;
   width: var(--nav-width);
   background-color: var(--first-color);
@@ -85,10 +85,10 @@ main {
   transition: 0.5s;
 }
 .show {
-  left: 0;
+  width: calc(var(--header-height) + 195px);
 }
 .space-toggle {
-  padding-left: calc(var(--nav-width) + 1rem);
+  padding-left: calc(var(--nav-width) + 200px);
 }
 
 @media screen and (min-width: 768px) {

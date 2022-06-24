@@ -8,14 +8,18 @@ import Search from '../../components/searchProduct/searchProducts'
 
 const Home = () => {
   return (
-    <div className='home'>
+    <section className='home'>
+      
+      <div className='homeConteiner'>
         
-        
-        <div className='homeConteiner'>
-          <Search/>
-          <Sidebar className='sidebar'/>
+        <div className='search'>
+        <Search/>
         </div>
-    </div>
+        <div>
+        <Sidebar className='sidebar'/>
+      </div>
+      </div>
+    </section>
   )
 }
 

@@ -30,9 +30,11 @@ const Sidebar = () => {
           </Link>
         </div>
       </header>
+      <div>
       <aside className={`sidebar ${show ? "show" : null}`}>
         <Navbar/>
       </aside>
+      </div>
     </main>
   );
 };

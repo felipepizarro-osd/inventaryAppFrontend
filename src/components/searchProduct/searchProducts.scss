@@ -1,14 +1,14 @@
+
 .Buscar {
     max-width: 100%;
     height: auto;
-    background-image: url("../img/backgroundHome.jpg");
     padding: 10px;
     display: flex;
-    margin-top: 1rem;
+    margin-top: 2.9rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 95vh;
     
     
 
@@ -77,6 +77,18 @@
             
 
         }
+    }
+
+}
+@media screen and (max-width: 700px) {
+    .home{
+        flex-direction: column;
+    }
+    .search{
+        margin-left: 2.8rem;
+    }
+    .sidebar{
+        position: fixed;
     }
 
 }

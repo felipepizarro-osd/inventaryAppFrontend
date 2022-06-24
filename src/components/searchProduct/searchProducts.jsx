@@ -126,6 +126,7 @@ export default function SearchProducts() {
     </div>
   );
   return (
+    <div>
     <div className="Buscar">
       <div className="top">
         <div className="title">Sistema de Inventario</div>
@@ -181,6 +182,7 @@ export default function SearchProducts() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

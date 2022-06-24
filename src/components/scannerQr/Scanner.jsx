@@ -24,7 +24,7 @@ const Scanner = () => {
   const [boton, setBoton] = useState(false);
 
   const handleBoton = () => {
-    setBoton(true);
+    setBoton(!setBoton);
   };
   const handleCloseBoton =  () => {
     setBoton(false);
@@ -110,7 +110,7 @@ const Scanner = () => {
       </Grid>
     </div>
   );
-  const [mystream, setmystream] = useState(false);
+  const [mystream, setmystream] = useState(true);
   const [videoswitch, setvideo] = useState(true);
   const myvideo = useRef(null);
   
@@ -150,8 +150,9 @@ const handleVideo = () => {
         <Button size="large" variant="contained" onClick={handleVideo}>{videoswitch ? "Desactivar camara" : 
                     "Activar camara"}</Button>
     </div>
-    <div> 
-       <video ref={myvideo} style={{width: '100%', height:'200px'}}><QrReader 
+    <div style={{backgroundColor:'black'}}> 
+        <video ref={myvideo} style={{width: '100%', height:'200px'}}>   
+        <QrReader 
           delay={300}
           onResult={(result) => {
               if (!!result) {
@@ -159,8 +160,9 @@ const handleVideo = () => {
               searchProduct(result?.text);
             }
           }}
-        /></video>
+        />
       
+        </video>      
       <Modal open={open} onClose={handleClickOpen} >
         {body}
       </Modal>

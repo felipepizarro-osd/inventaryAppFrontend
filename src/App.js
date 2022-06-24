@@ -2,6 +2,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login"
 import Single from "./pages/single/single"
 import New from "./pages/new/New"
+import Stock from "./pages/stock/stock"
 
 
 import {
@@ -29,6 +30,9 @@ function App() {
               <Route index element={<AlmacenarEdit/>}/>
               <Route path=":productId" element={<Single/>}/>
               <Route path="new" element={<New/>}/>
+            </Route>
+            <Route path="revisar_stock">
+              <Route index element={<Stock/>}/>
             </Route>
         </Routes>
       </BrowserRouter>

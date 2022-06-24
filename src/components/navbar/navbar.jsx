@@ -25,7 +25,7 @@ function navbar() {
           <SearchIcon className="nav-link-icon" />
           <span className="nav-link-name">Buscar Producto</span>
         </Link>
-        <Link to="users" className="nav-link">
+        <Link to="/products" className="nav-link">
           <Inventory2Icon className="nav-link-icon" />
           <span className="nav-link-name">
             Almacenar o editar producto
@@ -35,7 +35,7 @@ function navbar() {
           <ExitToAppIcon className="nav-link-icon" />
           <span className="nav-link-name">Retirar Producto</span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="/revisar_stock" className="nav-link">
           <CheckBoxIcon className="nav-link-icon" />
           <span className="nav-link-name">Revisar stock</span>
         </Link>
