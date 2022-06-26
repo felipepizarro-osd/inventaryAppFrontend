@@ -4,16 +4,28 @@ import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import { Dialog,DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-
+import { get } from 'react-hook-form';
+/*
+primero modificamos los dialogs para que el cierren y abran y renderizen cosas distintas 
+lo que pasa ahora es que la option de la mui datatable segun el example entregaa value tableMeta and UpdateValue 
+lo que pasa es que tengo que pasarle el objeto que seleccione en la tabla pero no se como recuperarlo en la 
+maldita tabla solo me ofrece el rowindex pero eso no dice nada del objeto que quiero modificar
+hay 2 opciones pruebo mas y veo si puedo hacerlo
+o hago la tabla desde 0 con otro metodo a ver si funca
+*/
 
 const Edit = () => {
 
   const [products, setProducts] = useState([])
   //metodo del modal
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  //const handleClickOpen = () => setOpen(true);
+  //const handleClose = () => setOpen(false);
+  const [dialogCreate,setDialogCreate] = useState(false)
+  const [dialogUpdate,setDialogUpdate] = useState(false)
 
+  
+  
   const url = 'http://localhost:4000/api/products';
 
   const getData = async () => {
@@ -23,6 +35,12 @@ const Edit = () => {
       setProducts(data)
     })
   }
+  const OpenCloseDialog = () =>{
+    setDialogCreate(!dialogCreate);
+  }
+  const OpenCloseDialogUpdate = () =>{
+    setDialogUpdate(!dialogUpdate);
+  }
 
   const [sku, setSku] = useState('');
   const [Nombre, setNombre] = useState('');
@@ -31,7 +49,34 @@ const Edit = () => {
   const [Stock, setStock] = useState('')
   const [Stock_min, setStockMin] = useState('')
   const [Unidad, setUnidad] = useState('')
+  const [Bodega, setBodega] = useState('')
+  const [Modulo, setModulo] = useState('')
+  const [Posicion, setPosicion] = useState('')
 
+  const [skuS, setSkuS] = useState('');
+  const [NombreS, setNombreS] = useState('');
+  const [Nombre_ServicioS, setNombreServicioS] = useState('');
+  const [Part_NumberS, setPartNumberS] = useState('')
+  const [StockS, setStockS] = useState('')
+  const [Stock_minS, setStockMinS] = useState('')
+  const [UnidadS, setUnidadS] = useState('')
+  const [BodegaS, setBodegaS] = useState('')
+  const [ModuloS, setModuloS] = useState('')
+  const [PosicionS, setPosicionS] = useState('')
+
+  const productObjectSelected = {
+    sku: skuS,
+    Nombre: NombreS,
+    Nombre_Servicio: Nombre_ServicioS,
+    Part_Number: Part_NumberS,
+    Stock: StockS,
+    Stock_min: Stock_minS,
+    Unidad: UnidadS,
+    Bodega: BodegaS,
+    Modulo: ModuloS,
+    Posicion: PosicionS
+
+  }
   const productObject = {
     sku: sku,
     Nombre: Nombre,
@@ -39,18 +84,30 @@ const Edit = () => {
     Part_Number: Part_Number,
     Stock: Stock,
     Stock_min: Stock_min,
-    Unidad: Unidad
-
+    Unidad: Unidad,
+    Bodega: Bodega,
+    Modulo: Modulo,
+    Posicion: Posicion
   }
   const CreateProduct = async (e) => {
-    handleClose()
+    //handleClose()
     await axios.post(url, productObject).then((response) => {
       const data = response.data
       console.log(data);
-      setProducts(data);
+      setProducts(products.concat(data));
       console.log(response.status)
-
-
+      OpenCloseDialog()
+    })
+  }
+  const EditProduct = async (e) => {
+    //handleClose()
+    await axios.put(url+'/'+productObjectSelected.sku,productObjectSelected).then((response) => {
+      const data = response.data
+      console.log(data);
+      setProducts(products.concat(data));
+      getData()
+      console.log(response.status)
+      OpenCloseDialogUpdate()
     })
   }
   const handleSku = e => {
@@ -74,10 +131,69 @@ const Edit = () => {
   const handleUnidad = e => {
     setUnidad(e.target.value);
   };
+  const handleBodega = e => {
+    setBodega(e.target.value);
+  };
+  const handleModulo = e => {
+    setModulo(e.target.value);
+  };
+  const handlePosicion = e => {
+    setPosicion(e.target.value);
+  };
+//donde se reciben lso cambios del producto seleccionado para recuperarlos
+const handleChangeSku = e => {
+  setSkuS(e.target.value);
+};
+const handleChangeName = e => {
+  setNombreS(e.target.value);
+};
+const handleChangeService = e => {
+  setNombreServicioS(e.target.value);
+};
+const handleChangePartNumber = e => {
+  setPartNumberS(e.target.value);
+};
+const handleChangeStock = e => {
+  setStockS(e.target.value);
+};
+const handleChangeStockMin = e => {
+  setStockMinS(e.target.value);
+};
+const handleChangeUnidad = e => {
+  setUnidadS(e.target.value);
+};
+const handleChangeBodega = e => {
+  setBodegaS(e.target.value);
+};
+const handleChangeModulo = e => {
+  setModuloS(e.target.value);
+};
+const handleChangePosicion = e => {
+  setPosicionS(e.target.value);
+};
   useEffect(() => {
     getData()
   }, [])
+  
+  const ProductoSeleccionado = (product,caso)=>{
+    console.log(product)
+    setSkuS(product[0])
+    //console.log(productObjectSelected.sku);
+    setNombreS(product[1])
+    setNombreServicioS(product[2])
+    setPartNumberS(product[3])
+    setStockS(product[4])
+    setStockMinS(product[5])
+    setUnidadS(product[6])
+    setBodegaS(product[7])  
+    setModuloS(product[8])
+    setPosicionS(product[9])
+    console.log(productObjectSelected);
+    
+    (caso === 'Edit' )&&OpenCloseDialogUpdate()
 
+  }
+  
   const columns = [
     {
       name: "Sku",
@@ -110,6 +226,19 @@ const Edit = () => {
       label: "Unidad"
     },
     {
+      name: "Bodega",
+      label: "Bodega"
+    },
+    {
+      name: "Modulo",
+      label: "Modulo"
+    },
+    {
+      name: "Posicion",
+      label: "Posicion"
+    },
+
+    {
       name: "Edit",
       options: {
         filter: true,
@@ -117,8 +246,12 @@ const Edit = () => {
         empty: true,
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
-            <button className='addProduct' onClick={() => window.alert(`Clicked "Edit" for row ${tableMeta.rowIndex}`)}>
+
+            <button className='addProduct' onClick={
+              ()=> ProductoSeleccionado(tableMeta.rowData,'Edit')
+              /*() => window.alert(`Clicked "Edit" for row ${tableMeta.rowData}`)*/}>
               Editar
+              
             </button>
           );
         }
@@ -126,24 +259,125 @@ const Edit = () => {
     },
   ]
   //crear producto
-  const useStyles = {
-    position: 'absolute',
-    padding: "12px 12px 12px",
-    backgroundColor: 'white',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: '20px'
 
-  }
-  const prodStyles = {
-    borderBottom: '6px', padding: '4px'
-  }
-  const colorStyles = {
-    backgroundColor: '#1b5a74',
-    color: 'white',
 
-  }
+
+  //Body del dialog editar producto 
+  const bodyEditar = (
+    <div>
+      <DialogTitle>Editar</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Rellene los campos necesarios para incluir un producto nuevo al inventario
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Sku del producto'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeSku}
+          value={productObjectSelected.sku}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Nombre del producto'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeName}
+          value={productObjectSelected.Nombre}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Nombre del Servicio asociado al producto'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeService}
+          value={productObjectSelected.Nombre_Servicio}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Part Number'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangePartNumber}
+          value={productObjectSelected.Part_Number}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Stock recibido del producto'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeStock}
+          value={productObjectSelected.Stock}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Stock minimo del producto en bodega'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeStockMin}
+          value={productObjectSelected.Stock_min}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          label='Unidad'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeUnidad}
+          value={productObjectSelected.Unidad}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Bodega'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeBodega}
+          value={productObjectSelected.Bodega}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Modulo'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangeModulo}
+          value={productObjectSelected.Modulo}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Posicion'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleChangePosicion}
+          value={productObjectSelected.Posicion}
+        />
+        
+      </DialogContent>
+          <DialogActions>
+          <Button onClick={()=>OpenCloseDialogUpdate()}>Cerrar</Button>
+          <Button type='Submit' onClick={()=>{EditProduct()}}  >Editar</Button>
+        </DialogActions>
+    </div>
+  )
   const body = (
     <div>
       <DialogTitle>Crear</DialogTitle>
@@ -214,10 +448,38 @@ const Edit = () => {
           variant='standard'
           onChange={handleUnidad}
         />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Bodega'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleBodega}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Modulo'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handleModulo}
+        />
+                <TextField
+          autoFocus
+          margin='dense'
+          label='Posicion'
+          type='text'
+          fullWidth
+          variant='standard'
+          onChange={handlePosicion}
+        />
+        
       </DialogContent>
-      <DialogActions>
-          <Button onClick={handleClose}>Cerrar</Button>
-          <Button type='Submit' onClick={handleClose} onSubmit={CreateProduct} >Guardar</Button>
+          <DialogActions>
+          <Button onClick={()=>OpenCloseDialog()}>Cerrar</Button>
+          <Button type='Submit' onClick={()=>CreateProduct()}  >Guardar</Button>
         </DialogActions>
     </div>
   )
@@ -226,8 +488,10 @@ const Edit = () => {
     <div className='edit'>
       <div className='editTitle'>
         <h1 className='titulo'>Crear Producto</h1>
-        <button onClick={handleClickOpen} className='addProduct'>Crear</button>
-        <Dialog open={open} onClose={handleClose}>{body}</Dialog>
+        <button onClick={()=>OpenCloseDialog()} className='addProduct'>Crear</button>
+        <Dialog open={dialogCreate} onClose={OpenCloseDialog}>{body}</Dialog>
+        <Dialog open={dialogUpdate} onClose={OpenCloseDialogUpdate}>{bodyEditar}</Dialog>
+
       </div>
       <div className='productContainer'>
         <div>
