@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import './Edit.scss'
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import { Dialog,DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { get } from 'react-hook-form';
-/*
-primero modificamos los dialogs para que el cierren y abran y renderizen cosas distintas 
-lo que pasa ahora es que la option de la mui datatable segun el example entregaa value tableMeta and UpdateValue 
-lo que pasa es que tengo que pasarle el objeto que seleccione en la tabla pero no se como recuperarlo en la 
-maldita tabla solo me ofrece el rowindex pero eso no dice nada del objeto que quiero modificar
-hay 2 opciones pruebo mas y veo si puedo hacerlo
-o hago la tabla desde 0 con otro metodo a ver si funca
-*/
 
-const Edit = () => {
+
+const Edit = React.memo(() => {
 
   const [products, setProducts] = useState([])
   //metodo del modal
@@ -110,6 +102,8 @@ const Edit = () => {
       OpenCloseDialogUpdate()
     })
   }
+
+
   const handleSku = e => {
     setSku(e.target.value);
   };
@@ -393,6 +387,7 @@ const handleChangePosicion = e => {
           fullWidth
           variant='standard'
           onChange={handleSku}
+          
         />
         <TextField
           autoFocus
@@ -505,6 +500,6 @@ const handleChangePosicion = e => {
       </div>
     </div>
   )
-}
+})
 
 export default Edit
