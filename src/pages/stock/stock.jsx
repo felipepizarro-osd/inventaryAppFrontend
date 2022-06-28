@@ -1,19 +1,9 @@
-import MaterialTable from 'material-table'
 import React from 'react'
 import Sidebar from '../../components/sidebar/sidebar'
 import './stock.scss'
+import TablaStock from '../../components/table/TablaStock'
 
 const Stock = () => {
-
-    const columns=[
-        {title:"Sku", field:"sku"},
-        {title:"Nombre", field:"nombre"},
-        {title:"Nombre de Servicio", field:"nombre_servicio"},
-        {title:"Part number", field:"part_number"},
-        {title:"Stock", field:"stock"},
-        {title:"Stock min", field:"stock_min"},
-        {title:"Unidad", field:"unidad"}
-    ]
   return (
     <section className='home'>
     <div >  
@@ -22,7 +12,7 @@ const Stock = () => {
     <div className='homeConteiner'>
       
       <div className='table'>
-        <MaterialTable columns={columns}/>
+        <TablaStock/>
       </div>
     </div>
     </section>
