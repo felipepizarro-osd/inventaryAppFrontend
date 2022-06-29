@@ -1,10 +1,11 @@
-import React, {useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, Fragment } from 'react';
 import { QrReader } from 'react-qr-reader';
 import axios from "axios";
 import { Modal, IconButton, Grid ,Button} from "@mui/material";
 import { QRCode } from "react-qr-svg";
 import CloseIcon from "@mui/icons-material/Close";
 import "./Scanner.scss";
+
 
 const Scanner = () => {
   //Codigo para mostrar la ventana modal del QR
@@ -21,15 +22,31 @@ const Scanner = () => {
   };
   //----------------------------------------------
   const [data, setData] = useState({ sku: "" });
-  const [boton, setBoton] = useState(false);
+  const [playing,setPlaying]= useState(false);
 
-  const handleBoton = () => {
-    setBoton(!setBoton);
-  };
-  const handleCloseBoton =  () => {
-    setBoton(false);
-  };
+  const HEIGHT = 300;
+  const WIDTH = 300;
 
+  const startVideo = () => {
+    setPlaying(true)
+    navigator.getUserMedia(
+      {video: true,},
+      (stream) => {
+        let video = document.getElementsByClassName('app_videoFeed')[0];
+        if(video) {
+          video.srcObject = stream;
+        }
+      },
+      (err) => console.error(err)
+      )
+  }
+  const stopVideo = () => {
+    setPlaying(false)
+    let video = document.getElementsByClassName('app_videoFeed')[0];
+    video.srcObject.getTracks()[0].stop();
+  }
+  //----------------------------------------------
+  
   const [product, setProduct] = useState({ Sku: "" });
   const searchProduct = (sku) => {
       axios.get(`http://localhost:4000/api/products/${sku}`).then((response) => {
@@ -110,50 +127,25 @@ const Scanner = () => {
       </Grid>
     </div>
   );
-  const [mystream, setmystream] = useState(true);
-  const [videoswitch, setvideo] = useState(true);
-  const myvideo = useRef(null);
-  
-  useEffect(() => {
-    navigator.mediaDevices
-        .getUserMedia({ video: true})
-        .then((stream) => {
-            myvideo.current.srcObject = stream;
-            myvideo.current.autoplay = true;
-            myvideo.current.muted = false;
-            setmystream(stream);
-        });
-}, []);
 
-const handleVideo = () => {
-    if (videoswitch) {
-        setvideo(false);
-        mystream.getTracks().forEach(function (track) {
-            if (track.readyState === "live" && 
-                track.kind === "video") {
-                track.enabled = false;
-            }
-        });
-    } else {
-        setvideo(true);
-        mystream.getTracks().forEach(function (track) {
-            if (track.readyState === "live" && 
-                track.kind === "video") {
-                track.enabled = true;
-            }
-        });
-    }
-};
   return (
-    <>
+    <Fragment>
     <div className="bton">
-        <Button size="large" variant="contained" onClick={handleVideo}>{videoswitch ? "Desactivar camara" : 
-                    "Activar camara"}</Button>
+        {playing ? (<Button onClick={stopVideo}> Desactivar</Button>) : (<Button onClick={startVideo}> Activar</Button>)}
     </div>
-    <div style={{backgroundColor:'black'}}> 
-        <video ref={myvideo} style={{width: '100%', height:'200px'}}>   
-        <QrReader 
-          delay={300}
+    <div style={{display:'grid', justifyContent:'center', alignItems:'center', backgroundColor:'black'}}>
+      <Fragment>
+        <video height={HEIGHT} width={WIDTH} muted autoPlay className='app_videoFeed' >   
+        {playing ? 
+        (
+          <QrReader onFind = {playing}/>
+         ) :        
+        (
+        <Fragment>
+          <QrReader 
+          facingMode={"environment"}
+          className='app_videoFeed'
+          scanDelay={300}
           onResult={(result) => {
               if (!!result) {
               setData(result?.text);
@@ -161,14 +153,16 @@ const handleVideo = () => {
             }
           }}
         />
-      
-        </video>      
+        </Fragment>)
+      }
+        </video>   
+        </Fragment>   
+        </div>
       <Modal open={open} onClose={handleClickOpen} >
         {body}
       </Modal>
       
-      </div>
-    </>
+    </Fragment>
   );
 };
 export default Scanner;
