@@ -31,7 +31,7 @@ function navbar() {
             Almacenar o editar producto
           </span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="/retirar_productos" className="nav-link">
           <ExitToAppIcon className="nav-link-icon" />
           <span className="nav-link-name">Retirar Producto</span>
         </Link>
