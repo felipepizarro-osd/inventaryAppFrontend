@@ -1,24 +1,19 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Edit.scss'
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
-import { Dialog,DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, TextField } from '@mui/material';
+import { Dialog,DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 
 
 const Edit = React.memo(() => {
+  //url de la api 
+  const url = 'http://localhost:4000/api/products';
 
   const [products, setProducts] = useState([])
   //metodo del modal
-  const [open, setOpen] = useState(false);
-  //const handleClickOpen = () => setOpen(true);
-  //const handleClose = () => setOpen(false);
   const [dialogCreate,setDialogCreate] = useState(false)
   const [dialogUpdate,setDialogUpdate] = useState(false)
-
-  
-  
-  const url = 'http://localhost:4000/api/products';
 
   const getData = async () => {
     await axios.get(url).then((response) => {
@@ -55,7 +50,7 @@ const Edit = React.memo(() => {
   const [BodegaS, setBodegaS] = useState('')
   const [ModuloS, setModuloS] = useState('')
   const [PosicionS, setPosicionS] = useState('')
-
+  
   const productObjectSelected = {
     sku: skuS,
     Nombre: NombreS,
@@ -96,75 +91,13 @@ const Edit = React.memo(() => {
     await axios.put(url+'/'+productObjectSelected.sku,productObjectSelected).then((response) => {
       const data = response.data
       console.log(data);
-      setProducts(products.concat(data));
+      //setProducts(products.concat(data));
       getData()
       console.log(response.status)
       OpenCloseDialogUpdate()
     })
   }
 
-
-  const handleSku = e => {
-    setSku(e.target.value);
-  };
-  const handleNombre = e => {
-    setNombre(e.target.value);
-  };
-  const handleNombreServicio = e => {
-    setNombreServicio(e.target.value);
-  };
-  const handlePartNumber = e => {
-    setPartNumber(e.target.value);
-  };
-  const handleStock = e => {
-    setStock(e.target.value);
-  };
-  const handleStockmin = e => {
-    setStockMin(e.target.value);
-  };
-  const handleUnidad = e => {
-    setUnidad(e.target.value);
-  };
-  const handleBodega = e => {
-    setBodega(e.target.value);
-  };
-  const handleModulo = e => {
-    setModulo(e.target.value);
-  };
-  const handlePosicion = e => {
-    setPosicion(e.target.value);
-  };
-//donde se reciben lso cambios del producto seleccionado para recuperarlos
-const handleChangeSku = e => {
-  setSkuS(e.target.value);
-};
-const handleChangeName = e => {
-  setNombreS(e.target.value);
-};
-const handleChangeService = e => {
-  setNombreServicioS(e.target.value);
-};
-const handleChangePartNumber = e => {
-  setPartNumberS(e.target.value);
-};
-const handleChangeStock = e => {
-  setStockS(e.target.value);
-};
-const handleChangeStockMin = e => {
-  setStockMinS(e.target.value);
-};
-const handleChangeUnidad = e => {
-  setUnidadS(e.target.value);
-};
-const handleChangeBodega = e => {
-  setBodegaS(e.target.value);
-};
-const handleChangeModulo = e => {
-  setModuloS(e.target.value);
-};
-const handleChangePosicion = e => {
-  setPosicionS(e.target.value);
-};
   useEffect(() => {
     getData()
   }, [])
@@ -240,7 +173,6 @@ const handleChangePosicion = e => {
         empty: true,
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
-
             <button className='addProduct' onClick={
               ()=> ProductoSeleccionado(tableMeta.rowData,'Edit')
               /*() => window.alert(`Clicked "Edit" for row ${tableMeta.rowData}`)*/}>
@@ -271,7 +203,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeSku}
+          onChange={(e) => setSkuS(e.target.value)}
           value={productObjectSelected.sku}
         />
         <TextField
@@ -281,7 +213,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeName}
+          onChange={(e) => setNombreS(e.target.value)}
           value={productObjectSelected.Nombre}
         />
         <TextField
@@ -291,7 +223,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeService}
+          onChange={(e) => setNombreServicioS(e.target.value)}
           value={productObjectSelected.Nombre_Servicio}
         />
         <TextField
@@ -301,7 +233,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangePartNumber}
+          onChange={(e) => setPartNumberS(e.target.value)}
           value={productObjectSelected.Part_Number}
         />
         <TextField
@@ -311,7 +243,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeStock}
+          onChange={(e) => setStockS(e.target.value)}
           value={productObjectSelected.Stock}
         />
         <TextField
@@ -321,7 +253,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeStockMin}
+          onChange={(e) => setStockMinS(e.target.value)}
           value={productObjectSelected.Stock_min}
         />
         <TextField
@@ -331,7 +263,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeUnidad}
+          onChange={(e) => setUnidadS(e.target.value)}
           value={productObjectSelected.Unidad}
         />
                 <TextField
@@ -341,7 +273,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeBodega}
+          onChange={(e) => setBodegaS(e.target.value)}
           value={productObjectSelected.Bodega}
         />
                 <TextField
@@ -351,7 +283,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangeModulo}
+          onChange={(e) => setModuloS(e.target.value)}
           value={productObjectSelected.Modulo}
         />
                 <TextField
@@ -361,7 +293,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleChangePosicion}
+          onChange={(e) => setPosicionS(e.target.value)}
           value={productObjectSelected.Posicion}
         />
         
@@ -386,7 +318,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleSku}
+          onChange={(e) => setSku(e.target.value)}
           
         />
         <TextField
@@ -396,7 +328,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleNombre}
+          onChange={(e) => setNombre(e.target.value)}
         />
         <TextField
           autoFocus
@@ -405,7 +337,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleNombreServicio}
+          onChange={(e) => setNombreServicio(e.target.value)}
         />
         <TextField
           autoFocus
@@ -414,7 +346,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handlePartNumber}
+          onChange={(e) => setPartNumber(e.target.value)}
         />
         <TextField
           autoFocus
@@ -423,7 +355,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleStock}
+          onChange={(e) => setStock(e.target.value)}
         />
         <TextField
           autoFocus
@@ -432,7 +364,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleStockmin}
+          onChange={(e) => setStockMin(e.target.value)}
         />
         <TextField
           autoFocus
@@ -441,7 +373,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleUnidad}
+          onChange={(e) => setUnidad(e.target.value)}
         />
                 <TextField
           autoFocus
@@ -450,7 +382,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleBodega}
+          onChange={(e) => setBodega(e.target.value)}
         />
                 <TextField
           autoFocus
@@ -459,7 +391,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handleModulo}
+          onChange={(e) => setModulo(e.target.value)}
         />
                 <TextField
           autoFocus
@@ -468,7 +400,7 @@ const handleChangePosicion = e => {
           type='text'
           fullWidth
           variant='standard'
-          onChange={handlePosicion}
+          onChange={(e) => setPosicion(e.target.value)}
         />
         
       </DialogContent>
