@@ -1,8 +1,9 @@
 .home{
-    display: flex;
+    background-image: url("../../components/img/backgroundHome.jpg");
+    display: contents;
     .homeConteiner{
 
-        flex: 6;
+        flex: auto;
         .widgets,.charts{
             display: flex;
             padding: 20px;
@@ -23,4 +24,17 @@
             }
         }
     }
+}
+@media screen and (max-width: 768px) {
+    .home{
+        flex-direction: column;
+    }
+    .search{
+        margin-left: 2.8rem;
+        margin-top: 4rem;
+    }
+    .sidebar{
+        position: block;
+    }
+
 }
