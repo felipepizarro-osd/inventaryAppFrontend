@@ -10,6 +10,12 @@ import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 
 function navbar() {
+  const onSubmit=()=>{
+    localStorage.removeItem('isLogin');
+    localStorage.removeItem('name');
+    window.location.href = '/';
+  }
+
   return (
     <>
     <nav className="nav">
@@ -35,7 +41,7 @@ function navbar() {
           <ExitToAppIcon className="nav-link-icon" />
           <span className="nav-link-name">Retirar Producto</span>
         </Link>
-        <Link to="/revisar_stock" className="nav-link">
+        <Link to="/revisar_stock" className="nav-link" >
           <CheckBoxIcon className="nav-link-icon" />
           <span className="nav-link-name">Revisar stock</span>
         </Link>
@@ -51,7 +57,7 @@ function navbar() {
     </div>
     <Link to="" className="nav-link">
       <ExitToAppIcon />
-      <span className="nav-link-name">Logout</span>
+      <span className="nav-link-name" onClick={()=> onSubmit()} >Logout</span>
     </Link>
   </nav>
   </>

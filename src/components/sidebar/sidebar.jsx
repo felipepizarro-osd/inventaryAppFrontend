@@ -1,15 +1,48 @@
 import React, { useState } from "react";
 import "./sidebar.scss";
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import logo from "..//img/Logo.png";
 const tab = "\u00A0";
 
-const Sidebar = () => {
-  const [show, setShow] = useState(false);
+let nombre
 
+
+let entra=localStorage.getItem('isLogin');
+if(entra===null){
+  nombre='LOG IN';
+}
+else{
+  nombre=localStorage.getItem('name');
+  console.log(localStorage.getItem('isLogin'));
+}
+/*
+else{
+  console.log('entra')
+  nombre=localStorage.getItem('name');
+  localStorage.setItem('isLogin','"true"');
+  console.log('Despues de entrar: ',localStorage.getItem('isLogin'))
+}
+*/
+
+
+//localStorage.removeItem('isLogin')
+console.log('borrao', localStorage.getItem('isLogin'))
+const Sidebar = () => {
+
+  //console.log(localStorage.getItem('isLogin'))
+  const [show, setShow] = useState(false);
+  //console.log(localStorage.getItem('name'));
+  const onSubmit=()=>{
+    if(localStorage.getItem('isLogin')!==null){
+      window.location.href = '/';
+    }
+    else{
+      window.location.href = '/login';
+    }
+  }
   return (
     <main className={show ? "space-toggle" : null}>
       <header className={`header ${show ? "space-toggle" : null}`}>
@@ -22,12 +55,11 @@ const Sidebar = () => {
               {tab}Software{tab}Inventory
             </span>
           </div>
-
         <div className="nav-login">
-          <Link to="" className="nav-link">
-            <span className="nav-link-name">Log In</span>
+          <button to="/login" className="nav-link" onClick={() => onSubmit()}>
+            <span className="nav-link-name">{nombre}</span>
             <AccountCircleIcon className="icon" />
-          </Link>
+          </button>
         </div>
       </header>
       <div>

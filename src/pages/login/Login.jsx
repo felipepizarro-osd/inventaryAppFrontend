@@ -2,16 +2,16 @@ import React, {useState} from 'react'
 import {Grid, Paper, Avatar, TextField, FormGroup, FormControlLabel, Checkbox, Button, CssBaseline} from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock';
 import Sidebar from '../../components/sidebar/sidebar'
-import Navbar from '../../components/navbar/navbar'
+//import Navbar from '../../components/navbar/navbar'
 import axios from 'axios'
 import "./Login.scss"
+
 //import { FormControlUnstyled } from '@mui/base';
 
  
 //function enviarDatos(user)
 //let logeado=false;
 //window.isLogin = false;
-
 const Login=()=> {
   const paperStyle={padding :20, height:'50vh',width:280, margin: "80px auto"}
   const avatarStyle={backgroundColor: '#33A5FF'}
@@ -25,9 +25,8 @@ const Login=()=> {
     'rut':rut,
     'contrasena':contrasena
   }
-  
+  let names;
   const onSubmit=()=>{
-
     const request = async () => {
       try {
         const result = await axios.post('http://localhost:4000/api/login',user);
@@ -48,7 +47,12 @@ const Login=()=> {
         if(result.data.data !== 'Incorrect rut and/or Password!' & result.data.data !== 'Please enter rut and Password!' ){
           console.log('Login correcto!');
           console.log('Bienvenido',result.data.data)
-          window.IsLogin=true;
+          names = result.data.data;
+          //<Sidebar persona={names}/>
+          if(localStorage.getItem('isLogin')===null){
+            localStorage.setItem('isLogin', '"true"');
+            localStorage.setItem('name', names);
+          }
           window.location.href = '/';
         }
         else{
@@ -61,14 +65,13 @@ const Login=()=> {
       }
     })();
   }
-  
+  if(localStorage.getItem('isLogin')===null){
   return (
     <div className='login'>
       <Sidebar/>
       <div className='loginConteiner'>
         <Grid>
           <CssBaseline/>    
-          <Navbar/>
             <Paper elevation={10} style={paperStyle}> 
               <Grid align = 'center'>
                 <Avatar style={avatarStyle}> <LockIcon/> </Avatar>
@@ -85,6 +88,10 @@ const Login=()=> {
       </div>
     </div>
   )
+  }
+  else{
+    window.location.href='/';
+  }
 }
 
 export default Login
