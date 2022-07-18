@@ -1,0 +1,15 @@
+.login{
+    display: flex;
+    .loginConteiner{
+
+        flex: 6;
+        .sidebar{
+            padding: 10px;
+        }
+        .loginR{
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+    }
+}
