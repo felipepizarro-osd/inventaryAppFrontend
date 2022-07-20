@@ -27,10 +27,6 @@ function navbar() {
         </Link>
       </div>
       <div className="nav-Link">
-        <Link to="" className="nav-link">
-          <SearchIcon className="nav-link-icon" />
-          <span className="nav-link-name">Buscar Producto</span>
-        </Link>
         <Link to="/products" className="nav-link">
           <Inventory2Icon className="nav-link-icon" />
           <span className="nav-link-name">
