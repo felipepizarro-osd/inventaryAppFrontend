@@ -35,11 +35,11 @@ function navbar() {
           <CheckBoxIcon className="nav-link-icon" />
           <span className="nav-link-name">Revisar stock</span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="/Agregarproveedor" className="nav-link">
           <AddIcon className="nav-link-icon" />
           <span className="nav-link-name">Agregar Proveedor</span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="/AgregarBodegas" className="nav-link">
           <CreateIcon className="nav-link-icon" />
           <span className="nav-link-name">Crear o editar bodega</span>
         </Link>
