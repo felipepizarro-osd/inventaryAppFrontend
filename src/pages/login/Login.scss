@@ -1,5 +1,12 @@
 .login{
+    /*
+    background: url("../../components/img/backgroundHome.jpg") no-repeat center center fixed;
+    background-size: 100% 100%;
+    //width: 1600px; height: 749px;
+    width: auto; height: 1000px;;
+    */
     display: flex;
+
     .loginConteiner{
 
         flex: 6;
@@ -13,3 +20,4 @@
         }
     }
 }
+

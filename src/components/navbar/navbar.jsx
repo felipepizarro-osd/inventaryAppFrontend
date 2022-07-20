@@ -15,7 +15,6 @@ function navbar() {
     localStorage.removeItem('name');
     window.location.href = '/';
   }
-
   return (
     <>
     <nav className="nav">

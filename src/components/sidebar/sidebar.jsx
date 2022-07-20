@@ -16,25 +16,10 @@ if(entra===null){
 }
 else{
   nombre=localStorage.getItem('name');
-  console.log(localStorage.getItem('isLogin'));
 }
-/*
-else{
-  console.log('entra')
-  nombre=localStorage.getItem('name');
-  localStorage.setItem('isLogin','"true"');
-  console.log('Despues de entrar: ',localStorage.getItem('isLogin'))
-}
-*/
 
-
-//localStorage.removeItem('isLogin')
-console.log('borrao', localStorage.getItem('isLogin'))
 const Sidebar = () => {
-
-  //console.log(localStorage.getItem('isLogin'))
   const [show, setShow] = useState(false);
-  //console.log(localStorage.getItem('name'));
   const onSubmit=()=>{
     if(localStorage.getItem('isLogin')!==null){
       window.location.href = '/';
@@ -56,7 +41,7 @@ const Sidebar = () => {
             </span>
           </div>
         <div className="nav-login">
-          <button to="/login" className="nav-link" onClick={() => onSubmit()}>
+        <Link to="/login" className="nav-link" onClick={() => onSubmit()}>
             <span className="nav-link-name">{nombre}</span>
             <AccountCircleIcon className="icon" />
           </button>
