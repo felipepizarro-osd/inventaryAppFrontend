@@ -62,7 +62,15 @@ const TablaRetiro = () => {
   return (
     <section>
       <div className='table'>
-        <MaterialTable options={{paging:true,pageSize:100, exportAllData:true, exportButton:true, columnsButton:true,paginationType:'stepped'}} title={'Retirar producto'} icons={tableIcons} columns={columns} data={products}
+        <MaterialTable 
+        options={{
+          sorting: true, search: true, searchFieldAlignment: 'right', searchAutoFocus: true, searchFieldVariant: 'outlined',
+          filtering: false, paging: true, pageSizeOptions: [5, 7, 10, 20, 30], pageSize: 7, paginationType: "stepped",
+          showFirstLastPageButtons: false, paginationPosition: 'bottom',
+          exportButton: true, exportAllData: true, exportFileName: 'DataTable', addRowPosition: 'first', actionsColumnIndex: -1
+        }}
+        title={'Retirar producto'} 
+        icons={tableIcons} columns={columns} data={products}
         actions={[
             {
               icon: () => <button>Retirar</button>,
