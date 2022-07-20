@@ -1,16 +1,20 @@
 import React from 'react'
 import Sidebar from '../../components/sidebar/sidebar'
-import Edit from '../../components/edit/Edit'
+import Editar from '../../components/edit/Editar'
+import  './almacenarEdir.scss'
 const AlmacenarEdit = () => {
   return (
-    <div className='home'>
-        
-    
+    <section className='home'>
+    <div >  
+      <Sidebar className='sidebar'/>
+    </div>
     <div className='homeConteiner'>
-      <Edit/>
-      <Sidebar className='sidebar'/> 
+      
+      <div className='table'>
+        <Editar/>
+      </div>
     </div>
-    </div>
+    </section>
   )
 }
 
