@@ -6,28 +6,33 @@ import Sidebar from '../../components/sidebar/sidebar'
 import axios from 'axios'
 import "./Login.scss"
 
-import backgroundHome from '../../components/img/backgroundHome.jpg'
+import backgroundHome from '../../components/img/bodega.png'
 
 
 const useStyles = makeStyles(theme => ({
   root: {
-      backgroundImage: `url(${backgroundHome})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      height: '100vh'
+    backgroundImage: `url(${backgroundHome})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    marginLeft: '0',
+    marginBottom: '0',
+    display: 'flex',
   },
   container: {
       height: '60%',
       marginTop: theme.spacing(20),
+      display: 'flex',
       [theme.breakpoints.down(400 + theme.spacing(2) + 2)]: {
-          marginTop: 0,
-          width: '100%',
-          height: '100%'
+          marginTop: -400,
+          marginLeft: 50,
+          width: '80%',
+          height: '60%'
       }
   },
   div: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(4),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'

@@ -16,6 +16,7 @@ function navbar() {
     localStorage.removeItem('nocontra');
     window.location.href = '/';
   }
+  if(localStorage.getItem('isLogin')!==null){
   return (
     <>
     <nav className="nav">
@@ -51,13 +52,52 @@ function navbar() {
         </Link>
       </div>
     </div>
-    <Link to="" className="nav-link">
+    <Link to="" className="nav-link" onClick={() => onSubmit()}>
       <ExitToAppIcon />
-      <span className="nav-link-name" onClick={()=> onSubmit()} >Logout</span>
+      <span className="nav-link-name" >Logout</span>
     </Link>
   </nav>
   </>
-  )
+  )}
+  else{
+    return (
+      <>
+      <nav className="nav">
+      <div>
+        <div>
+          <Link to="/" className="nav-logo">
+            <HomeIcon className="nav-logo-icon" />
+            <span className="nav-logo-name">Homepage</span>
+          </Link>
+        </div>
+        <div className="nav-Link">
+          <Link to="/products" className="nav-link">
+            <Inventory2Icon className="nav-link-icon" />
+            <span className="nav-link-name">
+              Almacenar o editar producto
+            </span>
+          </Link>
+          <Link to="" className="nav-link">
+            <ExitToAppIcon className="nav-link-icon" />
+            <span className="nav-link-name">Retirar Producto</span>
+          </Link>
+          <Link to="/revisar_stock" className="nav-link">
+            <CheckBoxIcon className="nav-link-icon" />
+            <span className="nav-link-name">Revisar stock</span>
+          </Link>
+          <Link to="/Agregarproveedor" className="nav-link">
+            <AddIcon className="nav-link-icon" />
+            <span className="nav-link-name">Agregar Proveedor</span>
+          </Link>
+          <Link to="/AgregarBodegas" className="nav-link">
+            <CreateIcon className="nav-link-icon" />
+            <span className="nav-link-name">Crear o editar bodega</span>
+          </Link>
+        </div>
+      </div>
+    </nav>
+    </>
+  )}
 }
 
 export default navbar
