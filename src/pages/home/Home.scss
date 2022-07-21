@@ -1,6 +1,8 @@
 
 .home{
-    background-image: url("../../components/img/backgroundHome.jpg");
+    background-image: url("../../components/img/fondo8.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
 
 }
@@ -26,7 +28,10 @@
         }
     }
 }
-
+.search{
+    margin-left: -8rem;
+    margin-top: 4rem;
+}
 @media screen and (max-width: 768px) {
     .home{
         flex-direction: column;

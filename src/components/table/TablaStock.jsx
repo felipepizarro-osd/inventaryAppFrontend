@@ -77,7 +77,8 @@ const TablaStock = () => {
   return (
     <section>
       <div className='table'>
-        <MaterialTable options={{pageSize:10,pageSizeOptions:[10,15,20],paging:true, exportAllData:true, exportButton:true, columnsButton:true,filtering:true}} title={'Revisar stock'} icons={tableIcons} columns={columns} data={products} />
+        <MaterialTable options={{pageSize:10,pageSizeOptions:[10,15,20],paging:true, exportAllData:true, exportButton:true, columnsButton:true,filtering:true, paginationPosition: 'bottom'}} 
+        title={'Revisar stock'} icons={tableIcons} columns={columns} data={products} />
       </div>
     </section>
   )
