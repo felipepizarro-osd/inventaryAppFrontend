@@ -1,0 +1,27 @@
+
+.home{
+    display: flex;
+}
+.homeConteiner{
+    margin-left: 0;
+    margin-top: 0; 
+    
+
+}
+.table{
+    margin-left: 1.4rem;
+    margin-top: 0; 
+    
+}
+.sidebar{
+    display: fixed;
+}
+@media screen and (min-width: 768px) {
+    .table{
+        margin-left: -4.19rem;
+        margin-top: 4.7rem;
+    }
+    .sidebar{
+        position: fixed;
+    }
+}
