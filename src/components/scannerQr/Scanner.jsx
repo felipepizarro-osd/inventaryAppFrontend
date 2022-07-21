@@ -123,6 +123,15 @@ const Scanner = () => {
 
           <p style={prodStyles}>Unidad: </p>
           <p style={colorStyles}>{product.Unidad}</p>
+
+          <p style={prodStyles}>Bodega: </p>
+          <p style={colorStyles}>{product.Bodega}</p>
+
+          <p style={prodStyles}>Modulo: </p>
+          <p style={colorStyles}>{product.Modulo}</p>
+
+          <p style={prodStyles}>Posicion: </p>
+          <p style={colorStyles}>{product.Posicion}</p>
         </Grid>
       </Grid>
     </div>
@@ -131,7 +140,7 @@ const Scanner = () => {
   return (
     <Fragment>
     <div className="bton">
-        {playing ? (<Button onClick={stopVideo}> Desactivar</Button>) : (<Button onClick={startVideo}> Activar</Button>)}
+        {playing ? (<Button style={{color:'white'}} onClick={stopVideo}> Desactivar camara</Button>) : (<Button Button style={{color:'white'}} className="bton" onClick={startVideo}> Activar camara</Button>)}
     </div>
     <div style={{display:'grid', justifyContent:'center', alignItems:'center', backgroundColor:'black'}}>
       <Fragment>
