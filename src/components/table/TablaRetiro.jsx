@@ -93,9 +93,14 @@ const TablaRetiro = () => {
   const columns=[
     {title:"Sku", field:"Sku"},
     {title:"Nombre", field:"Nombre",defaultSort:'asc'},
+    {title:'Nombre del Servicio', field: 'Nombre_Servicio' },
     {title:"Part number", field:"Part_Number"},
     {title:"Stock", field:"Stock",searchable:false},
-    {title:"Stock min", field:"Stock_min",searchable:false}
+    {title:"Stock min", field:"Stock_min",searchable:false},
+    { title: 'Unidad', field: 'Unidad', sorting: false, filtering: false, searchable: false },
+    { title: 'Bodega', field: 'Bodega'},
+    { title: 'Modulo', field: 'Modulo'},
+    { title: 'Posicion', field: 'Posicion'},
   ]
   const [products, setProducts] = useState([])
   const getData = async () => {
@@ -147,7 +152,9 @@ const TablaRetiro = () => {
 
 
   const cambiarStock = async () => {
-    producto.stock = producto.stock - dato.retiro[0]
+    console.log(dato.retiro);
+    console.log(producto.stock);
+    producto.stock = parseInt(producto.stock) - parseInt(dato.retiro)
     await axios.put("http://localhost:4000/api/products/"+producto.sku, producto)
     .then(response=>{
       var dataNueva= data;

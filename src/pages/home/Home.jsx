@@ -6,15 +6,13 @@ import Search from "../../components/searchProduct/searchProducts";
 const Home = () => {
   return (
     <section className="home">
-      
-      <div>
-          <Sidebar className="sidebar" />
-        </div>
       <div className="homeConteiner">
         <div className="search">
             <Search />
         </div>
-        
+        <div>
+          <Sidebar className="sidebar" />
+        </div>
       </div>
     </section>
   );

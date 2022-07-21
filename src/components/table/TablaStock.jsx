@@ -38,20 +38,17 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
-  
 const TablaStock = () => {
 
     const columns=[
         {title:"Sku", field:"Sku"},
         {title:"Nombre", field:"Nombre",defaultSort:'asc'},
         {title:"Nombre de Servicio", field:"Nombre_Servicio"},
-        {title:"Part number", field:"Part_Number",filtering:false,sorting:false},
-        {title:"Stock", field:"Stock",filtering:false,sorting:false},
-        {title:"Stock min", field:"Stock_min",filtering:false,sorting:false},
-        {title:"Bodega", field:"Bodega"},
-        {title:"Modulo", field:"Modulo",sorting:false},
-        {title:"Posicion", field:"Posicion",sorting:false},
-        {title:"Estado", field:"Estado", lookup:{Solicitar:'Solicitar', Correcto:'Correcto'}, sorting:false}
+        {title:"Part number", field:"Part_Number"},
+        {title:"Stock", field:"Stock"},
+        {title:"Stock min", field:"Stock_min"},
+        {title:"Unidad", field:"Unidad"},
+        {title:"Estado", field:"Estado"}
     ]
     const [products, setProducts] = useState([])
     const getData = async () => {
@@ -77,8 +74,7 @@ const TablaStock = () => {
   return (
     <section>
       <div className='table'>
-        <MaterialTable options={{pageSize:10,pageSizeOptions:[10,15,20],paging:true, exportAllData:true, exportButton:true, columnsButton:true,filtering:true, paginationPosition: 'bottom'}} 
-        title={'Revisar stock'} icons={tableIcons} columns={columns} data={products} />
+        <MaterialTable options={{paging:false,pageSize:100, exportAllData:true, exportButton:true, columnsButton:true,paginationType:'stepped'}} title={'Revisar stock'} icons={tableIcons} columns={columns} data={products} />
       </div>
     </section>
   )

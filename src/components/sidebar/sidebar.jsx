@@ -31,7 +31,6 @@ const Sidebar = () => {
   return (
     <main className={show ? "space-toggle" : null}>
       <header className={`header ${show ? "space-toggle" : null}`}>
-        
         <div className="header-toggle" onClick={() => setShow(!show)}>
           <ViewHeadlineIcon className="icon" />    
         </div>
