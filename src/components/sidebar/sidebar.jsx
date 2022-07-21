@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./sidebar.scss";
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import logo from "..//img/Logo.png";
@@ -44,7 +44,7 @@ const Sidebar = () => {
         <Link to="/login" className="nav-link" onClick={() => onSubmit()}>
             <span className="nav-link-name">{nombre}</span>
             <AccountCircleIcon className="icon" />
-          </button>
+          </Link>
         </div>
       </header>
       <div>

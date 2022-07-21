@@ -2,6 +2,11 @@ import MaterialTable from 'material-table'
 import React, { useEffect, useState} from 'react'
 import axios from 'axios';
 import { forwardRef } from 'react';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import { Modal, TextField, IconButton, Grid } from "@mui/material";
+import {makeStyles} from '@material-ui/core/styles';
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -18,6 +23,8 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -38,27 +45,147 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
+
+  const useEstilos = makeStyles((theme) => ({
+    modal: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
+    },
+    iconos:{
+      cursor: 'pointer'
+    }, 
+    inputMaterial:{
+      width: '100%'
+    }
+  }))
 const TablaRetiro = () => {
 
-    const columns=[
-        {title:"Sku", field:"Sku"},
-        {title:"Nombre", field:"Nombre",defaultSort:'asc'},
-        {title:"Part number", field:"Part_Number"},
-        {title:"Stock", field:"Stock",searchable:false},
-        {title:"Stock min", field:"Stock_min",searchable:false}
-    ]
-    const [products, setProducts] = useState([])
-    const getData = async () => {
-        await axios.get('http://localhost:4000/api/products').then((response) => {
-          const data = response.data
-          console.log(data);
-          setProducts(data)
-        })
-      }
-      
-      useEffect(() => {
-        getData();
-      }, [])
+  const useStyles = {
+    position: "absolute",
+    padding: "12px 12px 12px",
+    backgroundColor: "white",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "20px",
+    
+  };
+
+  const styles= useEstilos();
+
+  const prodStyles = {
+    borderBottom: "6px",
+    padding: "4px",
+  };
+  const colorStyles = {
+    backgroundColor: "#1b5a74",
+    color: "white",
+  };
+
+  
+  const columns=[
+    {title:"Sku", field:"Sku"},
+    {title:"Nombre", field:"Nombre",defaultSort:'asc'},
+    {title:"Part number", field:"Part_Number"},
+    {title:"Stock", field:"Stock",searchable:false},
+    {title:"Stock min", field:"Stock_min",searchable:false}
+  ]
+  const [products, setProducts] = useState([])
+  const getData = async () => {
+    await axios.get('http://localhost:4000/api/products').then((response) => {
+      const data = response.data
+      console.log(data);
+      setProducts(data)
+    })
+  }
+
+  const [data, setData]= useState([]);
+
+  const handleChange = (event) => {
+    setDato({
+      ...dato,
+      [event.target.name]: [event.target.value],
+    });
+  };
+
+  const [dato, setDato] = useState({ retiro: "" });
+
+  const [producto, setProductoSeleccionado]=useState({
+    sku: "",
+    nombre:"",
+    nombre_servicio:"",
+    part_number:"",
+    stock:"",
+    stock_min:"",
+    unidad:"",
+    bodega:"",
+    modulo:"",
+    posicion:""
+  })
+
+  const seleccionarProducto=(producto)=>{
+    setProductoSeleccionado(producto);
+    abrirCerrarModalR();
+  }
+
+  const abrirCerrarModalR=()=>{
+    setModalR(!modalR);
+  }
+
+  const [modalR, setModalR]= useState(false);
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+
+  const cambiarStock = async () => {
+    producto.stock = producto.stock - dato.retiro[0]
+    await axios.put("http://localhost:4000/api/products/"+producto.sku, producto)
+    .then(response=>{
+      var dataNueva= data;
+      dataNueva.map(producto=>{
+        if(producto.sku===producto.sku){
+          producto.sku=producto.sku;
+          producto.nombre=producto.nombre;
+          producto.nombre_servicio=producto.nombre_servicio;
+          producto.part_number=producto.part_number;
+          producto.stock=producto.stock;
+          producto.stock_min=producto.stock_min;
+          producto.unidad=producto.unidad;
+          producto.bodega=producto.bodega;
+          producto.modulo=producto.modulo;
+          producto.posicion=producto.posicion;
+        }
+      });
+      setData(dataNueva);
+      abrirCerrarModalR();
+    }).catch(error=>{
+      console.log(error);
+    })
+
+  }
+
+
+  const bodyR = (
+    <div className={styles.modal}>
+      <h3>Ingresar cantidad a retirar</h3>
+      <TextField className={styles.inputMaterial} label="Cantidad" type="number" name="retiro" onChange={handleChange} value={dato&&dato.retiro}/>
+      <br /><br />
+      <div align="right">
+        <Button color="primary" onClick={()=>cambiarStock()}>Retirar</Button>
+        <Button onClick={()=>abrirCerrarModalR()}>Cancelar</Button>
+      </div>
+    </div>
+  )
+
   return (
     <section>
       <div className='table'>
@@ -75,10 +202,15 @@ const TablaRetiro = () => {
             {
               icon: () => <button>Retirar</button>,
               tooltip: "Retirar",
-              onClick: (e, data) => console.log(data),
+              onClick: (event, rowData) => seleccionarProducto(rowData),
               // isFreeAction:true
             }
           ]} />
+        <Modal
+          open={modalR}
+          onClose={abrirCerrarModalR}>
+          {bodyR}
+        </Modal>
       </div>
     </section>
   )
