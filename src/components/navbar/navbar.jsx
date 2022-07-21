@@ -2,6 +2,7 @@ import React from 'react'
 import './navbar.scss'
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SearchIcon from "@mui/icons-material/Search";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import AddIcon from "@mui/icons-material/Add";
@@ -50,8 +51,13 @@ function navbar() {
           <CreateIcon className="nav-link-icon" />
           <span className="nav-link-name">Crear o editar bodega</span>
         </Link>
+        <Link to="/register" className="nav-link">
+        <PersonAddIcon />
+        <span className="nav-link-name" >Registrar usuario</span>
+        </Link>
       </div>
     </div>
+
     <Link to="" className="nav-link" onClick={() => onSubmit()}>
       <ExitToAppIcon />
       <span className="nav-link-name" >Logout</span>
