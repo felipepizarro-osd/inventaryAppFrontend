@@ -13,6 +13,7 @@ function navbar() {
   const onSubmit=()=>{
     localStorage.removeItem('isLogin');
     localStorage.removeItem('name');
+    localStorage.removeItem('nocontra');
     window.location.href = '/';
   }
   return (

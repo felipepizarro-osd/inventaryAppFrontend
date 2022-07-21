@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Sidebar from '../../components/sidebar/sidebar'
 import axios from 'axios'
 import "./Login.scss"
+
 import backgroundHome from '../../components/img/backgroundHome.jpg'
 
 
@@ -46,8 +47,9 @@ const useStyles = makeStyles(theme => ({
 
 
 const Login=()=> {
+  
   const classes = useStyles()
-
+  //const [show, setShow] = useState(true);
   const [rut,setRut]=useState("")
   const [contrasena,setContrasena]=useState("")
   
@@ -81,15 +83,15 @@ const Login=()=> {
           if(localStorage.getItem('isLogin')===null){
             localStorage.setItem('isLogin', '"true"');
             localStorage.setItem('name', names);
+
           }
           window.location.href = '/';
         }
         else{
-
+          localStorage.setItem('nocontra',true);
           window.location.href = 'http://localhost:3000/login';
         }
       } else {
-
        window.location.href = 'http://localhost:3000/login';
       }
     })();
@@ -129,6 +131,13 @@ const Login=()=> {
                           onChange={(e) => setContrasena(e.target.value)}
                           name='password'
                       />
+                      <div>
+                      {localStorage.getItem('nocontra') ? (
+                        <div style={{ color: 'red' }}>Incorrect rut and/or Password!</div>
+                      ) : (
+                        <div></div>
+                      )}
+                      </div>
                       <Button
                           fullWidth
                           variant='contained'

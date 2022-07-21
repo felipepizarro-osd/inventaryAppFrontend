@@ -25,9 +25,11 @@ const Sidebar = () => {
       window.location.href = '/';
     }
     else{
+      localStorage.removeItem('nocontra');
       window.location.href = '/login';
     }
   }
+  
   return (
     <main className={show ? "space-toggle" : null}>
       <header className={`header ${show ? "space-toggle" : null}`}>
