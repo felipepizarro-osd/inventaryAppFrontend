@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./Scanner.scss";
 
 
-const Scanner = () => {
+const Scanner = (props) => {
   //Codigo para mostrar la ventana modal del QR
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -136,7 +136,7 @@ const Scanner = () => {
       </Grid>
     </div>
   );
-
+  if(props.o !== false) { 
   return (
     <Fragment>
     <div className="bton">
@@ -172,6 +172,6 @@ const Scanner = () => {
       </Modal>
       
     </Fragment>
-  );
+  );}
 };
 export default Scanner;
