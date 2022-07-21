@@ -134,6 +134,12 @@ export default function SearchProducts() {
       </div>
     </div>
   );
+
+  const [o, setO] = useState(false)
+
+  const handleO = () => {
+    setO(!o);
+  };
   return (
     <div>
     <div className="Buscar">
@@ -144,8 +150,9 @@ export default function SearchProducts() {
       <div className="container">
         <div className="info">
           <h4>Buscar Producto por QR</h4>
+          <Button style={{color:'white'}} onClick={handleO}>Camara</Button>
           <div >
-            <Scanner />
+            <Scanner o={o} />
           </div>
           <form onSubmit={enviarDato}>
             <FormControl fullWidth sx={{ m: 0.5 }}>
