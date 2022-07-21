@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../../components/sidebar/sidebar'
 import './stock.scss'
-import backgroundHome from '../../components/img/backgroundHome.jpg'
+import backgroundHome from '../../components/img/bodega.png'
 import { makeStyles } from '@material-ui/core/styles'
 import TablaStock from '../../components/table/TablaStock'
 import {Grid, Container, Paper, Typography, Avatar, CssBaseline} from '@mui/material'
