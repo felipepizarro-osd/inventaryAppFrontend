@@ -107,15 +107,15 @@ const Editar = () => {
     { title: 'Stock', field: 'Stock', filterPlaceHolder: "Filtrar por Stock", type:'numeric'},
     { title: 'Stock minimo', field: 'Stock_min', filterPlaceHolder: "Filtrar por Stock minimo", type:'numeric' },
     { title: 'Unidad', field: 'Unidad', sorting: false, filtering: false, searchable: false, lookup:{Unidad:'Unidad',cm:'Centimetros',mt:'Metros',km:'kilometros',Rollo:'Rollos',Caja:'Caja',Bolsa:'Bolsa'}},
-    { title: 'Bodega', field: 'Bodega', filterPlaceHolder: "Filtrar por Bodega",editable:'never' },
-    { title: 'Modulo', field: 'Modulo', filterPlaceHolder: "Filtrar por Modulo",editable:'never' },
-    { title: 'Posicion', field: 'Posicion', filterPlaceHolder: "Filtrar por Posicion",editable:'never' },
+    { title: 'Bodega', field: 'Bodega', filterPlaceHolder: "Filtrar por Bodega",editable:'onAdd' },
+    { title: 'Modulo', field: 'Modulo', filterPlaceHolder: "Filtrar por Modulo",editable:'onAdd' },
+    { title: 'Posicion', field: 'Posicion', filterPlaceHolder: "Filtrar por Posicion",editable:'onAdd'},
   ]
 
   return (
     <section>
       <div className='table'>
-        <MaterialTable title={'Almacenar Producto'} columns={columns} data={products} icons={tableIcons}
+        <MaterialTable title='Almacenar Producto' columns={columns} data={products} icons={tableIcons}
           
           
           editable={{
@@ -127,17 +127,17 @@ const Editar = () => {
               setTimeout(() => resolve(), 500)
             }),
             onRowDelete:(selectedRow)=>new Promise((resolve,reject)=>{
-              console.log(selectedRow);
+              //console.log(selectedRow);
               DeleteProduct(selectedRow)
               setTimeout(() => resolve(), 500)
             })
           }}
           options={{
-            sorting: false, search: true, searchFieldAlignment: 'right', searchAutoFocus: true, searchFieldVariant: 'outlined',
-            filtering: true, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10, paginationType: "stepped",
-             showFirstLastPageButtons: false, paginationPosition: 'bottom',
+            sorting: true, search: true, searchFieldAlignment: 'right', searchAutoFocus: true, searchFieldVariant: 'outlined',
+            filtering: true, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10, 
+            showFirstLastPageButtons: false, paginationPosition: 'bottom',
             exportButton: true, exportAllData: true, exportFileName: 'DataTable', addRowPosition: 'first', actionsColumnIndex: -1,
-            columnsButton:true
+            tableLayout:'auto'
           }}
         />
       </div>
