@@ -131,7 +131,7 @@ const Scanner = () => {
   return (
     <Fragment>
     <div className="bton">
-        {playing ? (<Button onClick={stopVideo}> Desactivar</Button>) : (<Button onClick={startVideo}> Activar</Button>)}
+        {playing ? (<Button style={{color:'white'}} onClick={stopVideo}> Desactivar camara</Button>) : (<Button Button style={{color:'white'}} className="bton" onClick={startVideo}> Activar camara</Button>)}
     </div>
     <div style={{display:'grid', justifyContent:'center', alignItems:'center', backgroundColor:'black'}}>
       <Fragment>
