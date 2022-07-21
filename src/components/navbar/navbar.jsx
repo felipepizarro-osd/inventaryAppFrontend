@@ -10,6 +10,11 @@ import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 
 function navbar() {
+  const onSubmit=()=>{
+    localStorage.removeItem('isLogin');
+    localStorage.removeItem('name');
+    window.location.href = '/';
+  }
   return (
     <>
     <nav className="nav">
@@ -21,10 +26,6 @@ function navbar() {
         </Link>
       </div>
       <div className="nav-Link">
-        <Link to="" className="nav-link">
-          <SearchIcon className="nav-link-icon" />
-          <span className="nav-link-name">Buscar Producto</span>
-        </Link>
         <Link to="/products" className="nav-link">
           <Inventory2Icon className="nav-link-icon" />
           <span className="nav-link-name">
@@ -39,11 +40,11 @@ function navbar() {
           <CheckBoxIcon className="nav-link-icon" />
           <span className="nav-link-name">Revisar stock</span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="/Agregarproveedor" className="nav-link">
           <AddIcon className="nav-link-icon" />
           <span className="nav-link-name">Agregar Proveedor</span>
         </Link>
-        <Link to="" className="nav-link">
+        <Link to="/AgregarBodegas" className="nav-link">
           <CreateIcon className="nav-link-icon" />
           <span className="nav-link-name">Crear o editar bodega</span>
         </Link>
@@ -51,7 +52,7 @@ function navbar() {
     </div>
     <Link to="" className="nav-link">
       <ExitToAppIcon />
-      <span className="nav-link-name">Logout</span>
+      <span className="nav-link-name" onClick={()=> onSubmit()} >Logout</span>
     </Link>
   </nav>
   </>
