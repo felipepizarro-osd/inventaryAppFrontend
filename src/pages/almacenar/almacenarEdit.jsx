@@ -9,7 +9,6 @@ const AlmacenarEdit = () => {
       <Sidebar className='sidebar'/>
     </div>
     <div className='homeConteiner'>
-      
       <div className='table'>
         <Editar/>
       </div>
