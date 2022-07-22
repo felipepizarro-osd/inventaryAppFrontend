@@ -48,7 +48,7 @@ const columns = [
 
   { title: 'Responsable', field: 'Responsable', filterPlaceHolder: "Filtrar por Responsable" },
 
-  { title: 'Entrada_Salida', field: 'Entrada_Salida', filterPlaceHolder: "Filtrar por Entrada_Salida" }
+  { title: 'Entrada_Salida', field: 'Entrada_Salida', filterPlaceHolder: "Filtrar por Entrada_Salida", lookup:{Entrada:'Entrada',Salida:'Salida'}}
 
 
 ]
