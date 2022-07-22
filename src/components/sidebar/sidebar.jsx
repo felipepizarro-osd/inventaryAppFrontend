@@ -26,6 +26,7 @@ const Sidebar = () => {
     }
     else{
       localStorage.removeItem('nocontra');
+      localStorage.removeItem('registerdone');
       window.location.href = '/login';
     }
   }

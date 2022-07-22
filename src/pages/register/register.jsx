@@ -4,7 +4,7 @@ import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import Sidebar from '../../components/sidebar/sidebar'
 import axios from 'axios'
-
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import backgroundHome from '../../components/img/bodega.png'
 
 
@@ -23,11 +23,12 @@ const useStyles = makeStyles(theme => ({
       height: '60%',
       marginTop: theme.spacing(20),
       display: 'flex',
-      [theme.breakpoints.down(400 + theme.spacing(2) + 2)]: {
-          marginTop: -400,
+      
+      [theme.breakpoints.down(500 + theme.spacing(1) + 2)]: {
+          marginTop: -250,
           marginLeft: 50,
           width: '80%',
-          height: '60%'
+          height: '70%'
       }
   },
   div: {
@@ -49,7 +50,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
 const Login=()=> {
   
   const classes = useStyles()
@@ -58,55 +58,117 @@ const Login=()=> {
   const [contrasena,setContrasena]=useState("")
   const [contrasena2,setContrasena2]=useState("")
   const [nombre,setNombre]=useState("")
-  
+
   const user = {
     'rut':rut,
     'nombre':nombre,
     'contrasena':contrasena
   }
-  let names;
+
+  const backtoHome=()=>{
+    localStorage.removeItem('registerdone');
+    localStorage.removeItem('yaregistrado');
+    localStorage.removeItem('reingrese');
+    localStorage.removeItem('contradis'); 
+    window.location.href='http://localhost:3000/'
+  }
+  const backtoRegister=()=>{
+    localStorage.removeItem('registerdone');
+    localStorage.removeItem('yaregistrado');
+    localStorage.removeItem('reingrese');
+    localStorage.removeItem('contradis'); 
+    window.location.href='http://localhost:3000/register'
+  }
   const onSubmit=()=>{
-    console.log(contrasena);
-    console.log(contrasena2);
+
     if(contrasena !== contrasena2){
         console.log("Ambas son distintas");
+        localStorage.setItem('contradis',true);
+        localStorage.removeItem('yaregistrado');
+        localStorage.removeItem('reingrese');
+        window.location.href='http://localhost:3000/register';
+        //console.log(localStorage.getItem('contradis'));
     }
     else{
-    const request = async () => {
-      try {
-        const result = await axios.post('http://localhost:4000/api/register',user);
-        return {
-          success: true,
-          data: result
+      localStorage.removeItem('contradis'); 
+      const request = async () => {
+        try {
+          const result = await axios.post('http://localhost:4000/api/register',user);
+          return {
+            success: true,
+            data: result
+          }
+        } catch( error ) {
+          return {
+            success: false,
+            data: error
+          }
         }
-      } catch( error ) {
-        return {
-          success: false,
-          data: error
-        }
-      }
-    };
-    ( async() => {
-      const result = await request();
-      
-        if (!result.success) {
-            if(result.data.message === "Request failed with status code 500"){
-                console.log("ya registrado");
-                window.yaregistrado=true;
-            }
-            if(result.data.message === "Request failed with status code 400"){
-                console.log("Ingrese datos.");
-            }
-        }
-        else{
-            window.location.href = '/';
-        }
-              
-    })();
+      };
+      ( async() => {
+        const result = await request();
+        
+          if (!result.success) {
+              if(result.data.message === "Request failed with status code 500"){
+                  console.log("ya registrado");
+                  localStorage.setItem('yaregistrado',true);
+                  localStorage.removeItem('reingrese');
+                  window.location.href='http://localhost:3000/register';
+              }
+              if(result.data.message === "Request failed with status code 400"){
+                  console.log("Ingrese datos.");
+                  localStorage.setItem('reingrese',true);
+                  localStorage.removeItem('yaregistrado');
+                  window.location.href='http://localhost:3000/register';
+              }
+          }
+          else{
+            localStorage.removeItem('contradis'); 
+            localStorage.removeItem('yaregistrado');
+            localStorage.removeItem('reingrese');
+            localStorage.setItem('registerdone',true);
+            window.location.href='http://localhost:3000/register';
+          }   
+      })();
   }
 }
   if(localStorage.getItem('isLogin')!==null){
-
+    if(localStorage.getItem('registerdone')){
+      return (
+        <Grid container component='main' className={classes.root}>
+          <Sidebar/>
+            <CssBaseline />
+            <Container component={Paper} elevation={5} maxWidth='xs' className={classes.container}>
+                <div className={classes.div}>
+                    <Avatar className={classes.avatar}>
+                        <CheckCircleIcon />
+                    </Avatar>
+                    <Typography component='h1' variant='h5'>Register done</Typography>
+                    <form className={classes.form}>
+                    <Button
+                          fullWidth
+                          variant='contained'
+                          color='secondary'
+                          className={classes.button}
+                          onClick={()=> backtoHome()}
+                      >
+                        Back to home.
+                      </Button>
+                      <Button
+                          fullWidth
+                          variant='contained'
+                          color='secondary'
+                          className={classes.button}
+                          onClick={()=> backtoRegister()}
+                      >
+                        Enter new user
+                      </Button>
+                      </form>
+                </div>
+            </Container>
+        </Grid>
+    )}
+    else{
     return (
       <Grid container component='main' className={classes.root}>
         <Sidebar/>
@@ -118,16 +180,17 @@ const Login=()=> {
                   </Avatar>
                   <Typography component='h1' variant='h5'>Register</Typography>
                   <form className={classes.form}>
+
                       <TextField
                           fullWidth
                           autoFocus
                           color='primary'
                           margin='normal'
                           variant='outlined'
-                          label='Username'
+                          label='Rut'
                           value={user.rut}
                           onChange={(e) => setRut(e.target.value)}
-                          name='username'
+                          name='Rut'
                       />
                       <TextField
                           fullWidth
@@ -162,6 +225,27 @@ const Login=()=> {
                           onChange={(e) => setContrasena2(e.target.value)}
                           name='password'
                       />
+                      <div>
+                      {localStorage.getItem('contradis') ? (
+                        <div style={{ color: 'red' }}>reingrese contraseña</div>
+                      ) : (
+                        <div></div>
+                      )}
+                      </div>
+                      <div>
+                      {localStorage.getItem('reingrese') ? (
+                        <div style={{ color: 'red' }}>reingrese datos</div>
+                      ) : (
+                        <div></div>
+                      )}
+                      </div>
+                      <div>
+                      {localStorage.getItem('yaregistrado') ? (
+                        <div style={{ color: 'red' }}>El usuario ya esta registrado.</div>
+                      ) : (
+                        <div></div>
+                      )}
+                      </div>                
                       <Button
                           fullWidth
                           variant='contained'
@@ -175,7 +259,7 @@ const Login=()=> {
               </div>
           </Container>
       </Grid>
-  )
+  )}
   }
   else{
     window.location.href='/';

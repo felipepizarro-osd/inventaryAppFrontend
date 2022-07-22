@@ -3,6 +3,7 @@ import "./Home.scss";
 import Sidebar from "../../components/sidebar/sidebar";
 import Search from "../../components/searchProduct/searchProducts";
 
+
 const Home = () => {
   return (
     <section className="home">

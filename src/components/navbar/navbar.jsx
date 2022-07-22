@@ -17,6 +17,12 @@ function navbar() {
     localStorage.removeItem('nocontra');
     window.location.href = '/';
   }
+  const onRegister=()=>{
+    localStorage.removeItem('registerdone');
+    localStorage.removeItem('yaregistrado');
+    localStorage.removeItem('reingrese');
+    localStorage.removeItem('contradis'); 
+  }
   if(localStorage.getItem('isLogin')!==null){
   return (
     <>
@@ -51,7 +57,7 @@ function navbar() {
           <CreateIcon className="nav-link-icon" />
           <span className="nav-link-name">Crear o editar bodega</span>
         </Link>
-        <Link to="/register" className="nav-link">
+        <Link to="/register" className="nav-link" onClick={() => onRegister()}>
         <PersonAddIcon />
         <span className="nav-link-name" >Registrar usuario</span>
         </Link>
