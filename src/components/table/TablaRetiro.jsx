@@ -2,10 +2,7 @@ import MaterialTable from 'material-table'
 import React, { useEffect, useState} from 'react'
 import axios from 'axios';
 import { forwardRef } from 'react';
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import { Modal, TextField, IconButton, Grid } from "@mui/material";
+import { Modal, TextField} from "@mui/material";
 import {makeStyles} from '@material-ui/core/styles';
 
 import AddBox from '@material-ui/icons/AddBox';
@@ -24,7 +21,6 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@mui/material/Button";
-import CloseIcon from "@mui/icons-material/Close";
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -129,15 +125,9 @@ const TablaRetiro = () => {
     setModalError(!modalError);
   }
 
-  const abrirCerrarModalAdvertencia=()=>{
-    setModalAdvertencia(!modalAdvertencia);
-  }
-
   const [modalR, setModalR]= useState(false);
 
   const [modalError, setModalError]= useState(false);
-
-  const [modalAdvertencia, setModalAdvertencia]= useState(false);
 
   useEffect(() => {
     getData();
@@ -189,18 +179,6 @@ const TablaRetiro = () => {
     </div>
   )
 
-  const bodyAdvertencia = (
-    <div className={styles.modal}>
-      <h3>Ingresar cantidad a retirar</h3>
-      <TextField className={styles.inputMaterial} label="Cantidad" type="number" name="retiro" onChange={handleChange} value={dato&&dato.retiro}/>
-      <br /><br />
-      <div align="right">
-        <Button color="primary" onClick={()=> {cambiarStock()}}>Retirar</Button>
-        <Button onClick={()=>abrirCerrarModalAdvertencia()}>Cerrar</Button>
-      </div>
-    </div>
-  )
-
   return (
     <section>
       <div className='table'>
@@ -234,11 +212,6 @@ const TablaRetiro = () => {
           open={modalError}
           onClose={abrirCerrarModalError}>
           {bodyError}
-        </Modal>
-        <Modal 
-          open={modalAdvertencia} 
-          onClose={abrirCerrarModalAdvertencia}>
-          {bodyAdvertencia}
         </Modal>
       </div>
     </section>
