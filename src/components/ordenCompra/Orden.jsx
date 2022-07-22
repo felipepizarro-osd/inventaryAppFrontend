@@ -59,7 +59,7 @@ const Orden = () => {
 
   const url = 'http://localhost:4000/api/ocs';
   const urlR = 'http://localhost:4000/api/products';
-
+  
 
   const getData = async () => {
     await axios.get(url).then((response) => {
@@ -71,7 +71,7 @@ const Orden = () => {
   const CreateProduct = async (newRow,rowData) => {
     setProduct(newRow)
 
-    await axios.put(urlR+'/Order/'+rowData.Codigo, newRow).then((response) => {
+    await axios.put(urlR+'/Order/'+rowData.Codigo , newRow).then((response) => {
       const data = response.data
       console.log(data);
 
