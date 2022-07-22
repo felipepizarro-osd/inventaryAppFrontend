@@ -1,5 +1,6 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login"
+import Register from "./pages/register/register";
 import Single from "./pages/single/single"
 import New from "./pages/new/New"
 import Stock from "./pages/stock/stock"
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" /> 
             <Route index element={<Home/>}/>
             <Route path="login" element={<Login/>}/>
+            <Route path="register" element={<Register/>}/>
             <Route path="Agregarproveedor" element={<Agregarproveedor/>}/>
             <Route path="AgregarBodegas" element={<AgregarBodegas/>}/>
             <Route path="users">

@@ -25,13 +25,43 @@ const Sidebar = () => {
       window.location.href = '/';
     }
     else{
+      localStorage.removeItem('nocontra');
+      
       window.location.href = '/login';
     }
   }
+  if(localStorage.getItem('isLogin')!==null){
   return (
     <main className={show ? "space-toggle" : null}>
+    <header className={`header ${show ? "space-toggle" : null}`}>
+      <div className="header-toggle" onClick={() => setShow(!show)}>
+        <ViewHeadlineIcon className="icon" />    
+      </div>
+      <div className="logo ">
+          <img src={logo} alt="logo" height={30} width={70} />
+          <span className="logo-name">
+            {tab}Software{tab}Inventory
+          </span>
+        </div>
+
+      <div className="nav-login">
+      <div className="nav-link" >
+          <span className="nav-link-name">{nombre}</span>
+          <AccountCircleIcon className="icon" />
+        </div>
+      </div>
+    </header>
+    <div>
+    <aside className={`sidebar ${show ? "show" : null}`}>
+      <Navbar/>
+    </aside>
+    </div>
+  </main>
+  );}
+  else{
+    return(
+      <main className={show ? "space-toggle" : null}>
       <header className={`header ${show ? "space-toggle" : null}`}>
-        
         <div className="header-toggle" onClick={() => setShow(!show)}>
           <ViewHeadlineIcon className="icon" />    
         </div>
@@ -55,7 +85,8 @@ const Sidebar = () => {
       </aside>
       </div>
     </main>
-  );
+    )
+  }
 };
 
 export default Sidebar;

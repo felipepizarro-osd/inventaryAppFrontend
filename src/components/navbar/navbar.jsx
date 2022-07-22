@@ -3,6 +3,7 @@ import './navbar.scss'
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SearchIcon from "@mui/icons-material/Search";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import AddIcon from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
@@ -16,6 +17,12 @@ function navbar() {
     localStorage.removeItem('name');
     localStorage.removeItem('nocontra');
     window.location.href = '/';
+  }
+  const onRegister=()=>{
+    localStorage.removeItem('registerdone');
+    localStorage.removeItem('yaregistrado');
+    localStorage.removeItem('reingrese');
+    localStorage.removeItem('contradis'); 
   }
   if (localStorage.getItem('isLogin') !== null) {
     return (
@@ -54,6 +61,10 @@ function navbar() {
               <Link to="/ingresar" className="nav-link">
                 <PostAddIcon className="nav-link-icon" />
                 <span className="nav-link-name">Ingresar orden de compra</span>
+              </Link>
+              <Link to="/register" className="nav-link" onClick={() => onRegister()}>
+                <PersonAddIcon />
+                <span className="nav-link-name" >Registrar usuario</span>
               </Link>
             </div>
           </div>
