@@ -72,7 +72,6 @@ const TablaRetiro = () => {
   const columns=[
     {title:"Sku", field:"Sku"},
     {title:"Nombre", field:"Nombre",defaultSort:'asc'},
-    {title:'Nombre del Servicio', field: 'Nombre_Servicio' },
     {title:"Part number", field:"Part_Number"},
     {title:"Stock", field:"Stock",searchable:false},
     {title:"Stock min", field:"Stock_min",searchable:false},
