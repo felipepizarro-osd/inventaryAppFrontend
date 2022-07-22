@@ -144,7 +144,8 @@ const TablaRetiro = () => {
       console.log(data);
       getData()
       console.log(response.status)
-
+      dato.retiro[0]=0
+      abrirCerrarModalR();
     })
 
   }
@@ -156,7 +157,7 @@ const TablaRetiro = () => {
       <TextField className={styles.inputMaterial} label="Cantidad" type="number" name="retiro" onChange={handleChange} value={dato&&dato.retiro}/>
       <br /><br />
       <div align="right">
-        <Button color="primary" onClick={()=> new Promise((resolve, reject) =>{cambiarStock();setTimeout(() => resolve(), 500)})}>Retirar</Button>
+        <Button color="primary" onClick={()=> {cambiarStock()}}>Retirar</Button>
         <Button onClick={()=>abrirCerrarModalR()}>Cancelar</Button>
       </div>
     </div>
