@@ -3,6 +3,7 @@ import Login from "./pages/login/Login"
 import Single from "./pages/single/single"
 import New from "./pages/new/New"
 import Stock from "./pages/stock/stock"
+import Retiro from "./pages/retirar/retirar"
 import Agregarproveedor from "./pages/agregarproveedor/Agregarproveedor";
 import AgregarBodegas from "./pages/agregarBodegas/AgregarBodegas";
 
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path="revisar_stock">
               <Route index element={<Stock/>}/>
+            </Route>
+            <Route path="retirar_productos">
+              <Route index element={<Retiro/>}/>
             </Route>
             <Route path="ingresar">
               <Route index element={<OrdenCompra/>}/>
