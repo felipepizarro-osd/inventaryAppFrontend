@@ -99,25 +99,25 @@ const TablaRetiro = () => {
     });
   };
 
-  const [dato, setDato] = useState({ retiro: "" });
+  const [dato, setDato] = useState({ retiro: 0});
 
   const [productoSeleccionado, setProductoSeleccionado]=useState({
     sku: "",
-    nombre:"",
-    nombre_servicio:"",
-    part_number:"",
-    stock:"",
-    stock_min:"",
-    unidad:"",
-    bodega:"",
-    modulo:"",
-    posicion:"",
+    Nombre:"",
+    Nombre_Servicio:"",
+    Part_Number:"",
+    Stock:"",
+    Stock_min:"",
+    Unidad:"",
+    Bodega:"",
+    Modulo:"",
+    Posicion:"",
     retiro:""
   })
 
   const seleccionarProducto=(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)=>{
     console.log(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)
-    let producto = {sku:sku,nombre:nombre,nombre_servicio:nombre_servicio,part_number:part_number,stock:stock,stock_min:stock_min,unidad:unidad,bodega:bodega,modulo:modulo,posicion:posicion}
+    let producto = {sku:sku,Nombre:nombre,Nombre_Servicio:nombre_servicio,Part_Number:part_number,Stock:stock,Stock_min:stock_min,Unidad:unidad,Bodega:bodega,Modulo:modulo,Posicion:posicion}
     setProductoSeleccionado(producto);
     abrirCerrarModalR();
   }
@@ -135,7 +135,7 @@ const TablaRetiro = () => {
 
   const cambiarStock = async () => {
     console.log(dato.retiro[0]);
-    console.log(productoSeleccionado.stock);
+    console.log(productoSeleccionado.Stock);
     console.log("STATE productoSeleccionado",productoSeleccionado)
     productoSeleccionado.retiro = dato.retiro[0]
     console.log(productoSeleccionado.retiro);
