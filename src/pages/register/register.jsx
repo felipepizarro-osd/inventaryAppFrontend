@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(20),
       display: 'flex',
       
-      [theme.breakpoints.down(500 + theme.spacing(1) + 2)]: {
+      [theme.breakpoints.down(500 + theme.spacing(2) + 2)]: {
           marginTop: -250,
           marginLeft: 50,
           width: '80%',
@@ -227,14 +227,14 @@ const Login=()=> {
                       />
                       <div>
                       {localStorage.getItem('contradis') ? (
-                        <div style={{ color: 'red' }}>reingrese contraseña</div>
+                        <div style={{ color: 'red' }}>Contraseñas no coinciden.</div>
                       ) : (
                         <div></div>
                       )}
                       </div>
                       <div>
                       {localStorage.getItem('reingrese') ? (
-                        <div style={{ color: 'red' }}>reingrese datos</div>
+                        <div style={{ color: 'red' }}>Rellene todos los campos.</div>
                       ) : (
                         <div></div>
                       )}
