@@ -8,13 +8,14 @@ import { Modal} from "@mui/material";
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import { useEffect } from 'react';
-
+import { Link } from "react-router-dom";
 
 const Agregarproveedor = () => {
-  const paperStyle={padding :20, height:'40vh',width:350, margin: "100px auto"}
+  const paperStyle={padding :20, height:350,width:350, margin: "100px auto"}
   const avatarStyle={backgroundColor: '#33A5FF'}
   const btnstyle={margin:'10px 0', backgroundColor: '#EA454C'}
   const usuarioStyle={margin: "10px auto", textTransform: 'uppercase'}
+  const paperStyle2={padding :20, height:200,width:350, margin: "100px auto"}
 
   //Editar
   const useStyles = {
@@ -163,34 +164,29 @@ const Agregarproveedor = () => {
             </Paper>            
         </Grid>
       </div>
-      
-
-
-
-
+      <div className='AgregarBodegaConteiner'>     
+        <Grid>
+          <CssBaseline/>              
+            <Paper elevation={10} style={paperStyle2}> 
+              <Grid align = 'center'>
+                <Avatar style={avatarStyle}> <LibraryAddIcon/> </Avatar>
+                <h2>Editar Proveedor</h2>
+              </Grid>
+              <div className='BOTONLINK' style={{display: 'flex',  justifyContent:'center'}}> 
+                <Link to="/EditarProveedor" className="nav-link" >
+                  <Button type='submit'                     
+                    color='primary' variant='contained' 
+                    style={btnstyle} fullWidth >IR A EDITAR</Button>
+                </Link>
+              </div> 
+              <div className='AgregarUbicacionInformacion'>   
+              </div>      
+            </Paper>            
+        </Grid>
+      </div>
     </div>
   )
 }
 
 export default Agregarproveedor;
 
-
-/*
-
-      <div className='AgregarproveedorConteiner'>
-        <Grid>
-          <CssBaseline/>              
-            <Paper elevation={10} style={paperStyle}> 
-              <Grid align = 'center'>
-                <Avatar style={avatarStyle}> <LibraryAddIcon/> </Avatar>
-                <h2>Enlazar Sku a Proveedor</h2>
-              </Grid>
-              <TextField label='Nombre Proveedor' placeholder='Ingrese Nombre del Proveedor' fullWidth required name='Name' style={usuarioStyle}/>
-              <TextField label='Sku del Producto Vendido' placeholder='Ingrese Sku del Producto' fullWidth required name='Sku' style={usuarioStyle}/>
-                           
-              <Button type='submit' color='primary' variant='contained' style={btnstyle} fullWidth>Agregar Proveedor</Button>
-            </Paper>
-            
-        </Grid>
-      </div>
-*/

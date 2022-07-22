@@ -42,33 +42,33 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 // Bodega
-const AgregarBodega = () => {
+const AgregarProveedor = () => {
   //Editar 
   //Conexion 
   //=================================================================================================================================
 
 
   //opuesto a los de arriva
-  const [Estanterias, setEstanterias] = useState([]) 
-  const url = 'http://localhost:4000/api/estanterias';
+  const [Proveedor, setProveedor] = useState([]) 
+  const url = 'http://localhost:4000/api/pyp';
 
   
   const getData = async () => {
     await axios.get(url).then((response) => {
       const data = response.data
-      setEstanterias(data)
+      setProveedor(data)
     })
   }
 
-  const CreateEstanteria = async (newRow) => {
+  const CreateProveedor = async (newRow) => {
     await axios.post(url, newRow).then((response) => {
       const data = response.data
       if (response.status === 200){
         getData()        
         swal({
-          title:'Estanteria Creada',icon:'success',button:'Aceptar',timer:'2000'          
+          title:'Proveedor Creado',icon:'success',button:'Aceptar',timer:'2000'          
         }).then(res=>{
-          setEstanterias(...Estanterias,data)
+          setProveedor(...Proveedor,data)
           window.location.reload(true)
         })
       }
@@ -79,17 +79,14 @@ const AgregarBodega = () => {
     })
   }
 
-  const DeleteProduct = async (selectedRow)=> {
-    const prueba = {Bodega:selectedRow.Bodega, 
-      Modulo: selectedRow.Modulo, 
-      Posicion: selectedRow.Posicion, 
-      Sku_Producto:selectedRow.Sku_Producto, 
-      Num_Prod_Guardados:selectedRow.Num_Prod_Guardados}
+  const DeleteProveedor = async (selectedRow)=> {
+    const prueba = {Nombre_Prov:selectedRow.Nombre_Prov, 
+      Codigo_Producto: selectedRow.Codigo_Producto}
     
     await axios.delete(url,{data: prueba}).then((response) => {
       getData()
       swal({
-        title:'Combinacion Estanteria-Nivel Eliminado',icon:'success',button:'Aceptar',timer:'2000'
+        title:'Relacion Proveedor y producto suministrado Eliminado',icon:'success',button:'Aceptar',timer:'2000'
       })
     })
   }
@@ -99,27 +96,24 @@ const AgregarBodega = () => {
   }, [])
 
   const columns = [
-    { title: 'Bodega', field: 'Bodega', filterPlaceHolder: "Filtrar por Bodega"},
-    { title: 'Modulo', field: 'Modulo', filterPlaceHolder: "Filtrar por Modulo"},
-    { title: 'Posicion', field: 'Posicion', filterPlaceHolder: "Filtrar por Posicion",},
-    { title: 'Sku_Producto', field: 'Sku_Producto', filterPlaceHolder: "Filtrar por Posicion"},
-    { title: 'Num_Prod_Guardados', field: 'Num_Prod_Guardados', filterPlaceHolder: "Filtrar por Posicion"},
+    { title: 'Nombre_Prov', field: 'Nombre_Prov', filterPlaceHolder: "Filtrar por Nombre_Prov"},
+    { title: 'Codigo_Producto', field: 'Codigo_Producto', filterPlaceHolder: "Filtrar por Codigo_Producto"},
   ]
 
   return (
     <section>           
         <div className='table'>    
-          <MaterialTable title={'Crear y Eliminar Estanterias'} columns={columns} data={Estanterias} icons={tableIcons}
+          <MaterialTable title={'Crear y Eliminar relacion Nombre_Prov-Codigo_Producto'} columns={columns} data={Proveedor} icons={tableIcons}
             
             editable={{
               onRowAdd: (newRow) => new Promise((resolve, reject) => {    
-                CreateEstanteria(newRow); 
+                CreateProveedor(newRow); 
                 setTimeout(() => resolve(), 500) }).catch(error=>swal({
                 title:'Error en insertar',text:error.message,timer:'2000'
               })),
             
               onRowDelete:(selectedRow)=>new Promise((resolve, reject)=>{
-                DeleteProduct(selectedRow)
+                DeleteProveedor(selectedRow)
                 setTimeout(() => resolve(), 500)
               })
             }}
@@ -137,5 +131,5 @@ const AgregarBodega = () => {
 }
   
 
-export default AgregarBodega;
+export default AgregarProveedor;
 
