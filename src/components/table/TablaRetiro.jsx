@@ -111,7 +111,7 @@ const TablaRetiro = () => {
   })
 
   const seleccionarProducto=(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)=>{
-    console.log(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)
+    //console.log(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)
     let producto = {sku:sku,Nombre:nombre,Nombre_Servicio:nombre_servicio,Part_Number:part_number,Stock:stock,Stock_min:stock_min,Unidad:unidad,Bodega:bodega,Modulo:modulo,Posicion:posicion}
     setProductoSeleccionado(producto);
     abrirCerrarModalR();
@@ -135,9 +135,9 @@ const TablaRetiro = () => {
 
 
   const cambiarStock = async () => {
-    console.log(dato.retiro[0]);
-    console.log(productoSeleccionado.Stock);
-    console.log("STATE productoSeleccionado",productoSeleccionado);
+    //console.log(dato.retiro[0]);
+    //console.log(productoSeleccionado.Stock);
+    //console.log("STATE productoSeleccionado",productoSeleccionado);
     productoSeleccionado.retiro = dato.retiro[0]
     console.log(productoSeleccionado.retiro);
     if((parseInt(productoSeleccionado.Stock)-parseInt(dato.retiro[0]))>=0){
@@ -185,7 +185,7 @@ const TablaRetiro = () => {
         <MaterialTable 
         options={{
           sorting: true, search: true, searchFieldAlignment: 'right', searchAutoFocus: true, searchFieldVariant: 'outlined',
-          filtering: false, paging: true, pageSizeOptions: [5, 7, 10, 20, 30], pageSize: 7, paginationType: "stepped",
+          filtering: false, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10, paginationType: "stepped",
           showFirstLastPageButtons: false, paginationPosition: 'bottom',
           exportButton: true, exportAllData: true, exportFileName: 'DataTable', addRowPosition: 'first', actionsColumnIndex: -1
         }}
