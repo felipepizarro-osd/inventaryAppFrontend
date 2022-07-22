@@ -125,7 +125,7 @@ const AgregarBodega = () => {
             }}
             options={{
               sorting: false, search: true, searchFieldAlignment: 'right', searchAutoFocus: true, searchFieldVariant: 'outlined',
-              filtering: true, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10, paginationType: "stepped",
+              filtering: true, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10,
               showFirstLastPageButtons: false, paginationPosition: 'bottom',
               exportButton: true, exportAllData: true, exportFileName: 'DataTable', addRowPosition: 'first', actionsColumnIndex: -1,
               columnsButton:true

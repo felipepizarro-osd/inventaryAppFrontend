@@ -185,7 +185,7 @@ const TablaRetiro = () => {
         <MaterialTable 
         options={{
           sorting: true, search: true, searchFieldAlignment: 'right', searchAutoFocus: true, searchFieldVariant: 'outlined',
-          filtering: false, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10, paginationType: "stepped",
+          filtering: false, paging: true, pageSizeOptions: [10, 15, 20], pageSize: 10,
           showFirstLastPageButtons: false, paginationPosition: 'bottom',
           exportButton: true, exportAllData: true, exportFileName: 'DataTable', addRowPosition: 'first', actionsColumnIndex: -1
         }}
