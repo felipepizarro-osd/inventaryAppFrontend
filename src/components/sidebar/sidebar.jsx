@@ -71,7 +71,6 @@ const Sidebar = () => {
               {tab}Software{tab}Inventory
             </span>
           </div>
-
         <div className="nav-login">
         <Link to="/login" className="nav-link" onClick={() => onSubmit()}>
             <span className="nav-link-name">{nombre}</span>

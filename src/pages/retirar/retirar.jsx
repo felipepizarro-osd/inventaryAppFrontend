@@ -1,8 +1,9 @@
 import React from 'react'
 import Sidebar from '../../components/sidebar/sidebar'
-import EditarBodegasTabla from '../../components/editarBodegas/EditarBodegasTabla'
-import  './EditarBodegas.scss'
-const EditarBodegas = () => {
+import './retirar.scss'
+import TablaRetiro from '../../components/table/TablaRetiro'
+
+const Retiro = () => {
   return (
     <section className='home'>
     <div >  
@@ -10,11 +11,11 @@ const EditarBodegas = () => {
     </div>
     <div className='homeConteiner'>
       <div className='table'>
-        <EditarBodegasTabla/>
+        <TablaRetiro/>
       </div>
     </div>
     </section>
   )
 }
 
-export default EditarBodegas
+export default Retiro;
