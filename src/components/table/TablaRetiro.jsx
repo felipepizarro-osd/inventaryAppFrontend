@@ -126,7 +126,19 @@ const TablaRetiro = () => {
     setModalR(!modalR);
   }
 
+  const abrirCerrarModalError=()=>{
+    setModalError(!modalError);
+  }
+
+  const abrirCerrarModalAdvertencia=()=>{
+    setModalAdvertencia(!modalAdvertencia);
+  }
+
   const [modalR, setModalR]= useState(false);
+
+  const [modalError, setModalError]= useState(false);
+
+  const [modalAdvertencia, setModalAdvertencia]= useState(false);
 
   useEffect(() => {
     getData();
@@ -136,18 +148,22 @@ const TablaRetiro = () => {
   const cambiarStock = async () => {
     console.log(dato.retiro[0]);
     console.log(productoSeleccionado.Stock);
-    console.log("STATE productoSeleccionado",productoSeleccionado)
+    console.log("STATE productoSeleccionado",productoSeleccionado);
     productoSeleccionado.retiro = dato.retiro[0]
     console.log(productoSeleccionado.retiro);
-    await axios.put('http://localhost:4000/api/products/retiro/' + productoSeleccionado.sku, productoSeleccionado).then((response) => {
-      const data = response.data
-      console.log(data);
-      getData()
-      console.log(response.status)
-      dato.retiro[0]=0
+    if((parseInt(productoSeleccionado.Stock)-parseInt(dato.retiro[0]))>=0){
+      await axios.put('http://localhost:4000/api/products/retiro/' + productoSeleccionado.sku, productoSeleccionado).then((response) => {
+        const data = response.data
+        console.log(data);
+        getData()
+        console.log(response.status)
+        abrirCerrarModalR();
+      })
+    }else{
+      abrirCerrarModalError();
       abrirCerrarModalR();
-    })
-
+    }
+    dato.retiro[0]=0
   }
 
 
@@ -159,6 +175,29 @@ const TablaRetiro = () => {
       <div align="right">
         <Button color="primary" onClick={()=> {cambiarStock()}}>Retirar</Button>
         <Button onClick={()=>abrirCerrarModalR()}>Cancelar</Button>
+      </div>
+    </div>
+  )
+
+  const bodyError = (
+    <div className={styles.modal}>
+      <h4>Error</h4>
+      <h3>La cantidad a retirar indicada supera la disponible en Stock</h3>
+      <br /><br />
+      <div align="right">
+        <Button onClick={()=>abrirCerrarModalError()}>Cerrar</Button>
+      </div>
+    </div>
+  )
+
+  const bodyAdvertencia = (
+    <div className={styles.modal}>
+      <h3>Ingresar cantidad a retirar</h3>
+      <TextField className={styles.inputMaterial} label="Cantidad" type="number" name="retiro" onChange={handleChange} value={dato&&dato.retiro}/>
+      <br /><br />
+      <div align="right">
+        <Button color="primary" onClick={()=> {cambiarStock()}}>Retirar</Button>
+        <Button onClick={()=>abrirCerrarModalAdvertencia()}>Cerrar</Button>
       </div>
     </div>
   )
@@ -191,6 +230,16 @@ const TablaRetiro = () => {
           open={modalR}
           onClose={abrirCerrarModalR}>
           {bodyR}
+        </Modal>
+        <Modal 
+          open={modalError}
+          onClose={abrirCerrarModalError}>
+          {bodyError}
+        </Modal>
+        <Modal 
+          open={modalAdvertencia} 
+          onClose={abrirCerrarModalAdvertencia}>
+          {bodyAdvertencia}
         </Modal>
       </div>
     </section>
