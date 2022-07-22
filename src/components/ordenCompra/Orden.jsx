@@ -59,7 +59,7 @@ const Orden = () => {
 
   const url = 'http://localhost:4000/api/ocs';
   const urlR = 'http://localhost:4000/api/products';
-
+  
 
   const getData = async () => {
     await axios.get(url).then((response) => {
@@ -71,7 +71,7 @@ const Orden = () => {
   const CreateProduct = async (newRow,rowData) => {
     setProduct(newRow)
 
-    await axios.post(urlR+'/'+rowData.Codigo, newRow).then((response) => {
+    await axios.put(urlR+'/Order/'+rowData.Codigo , newRow).then((response) => {
       const data = response.data
       console.log(data);
 
@@ -196,6 +196,8 @@ const Orden = () => {
                             { title: 'Bodega', field: 'Bodega', filterPlaceHolder: "Filtrar por Bodega", editable: 'onAdd' },
                             { title: 'Modulo', field: 'Modulo', filterPlaceHolder: "Filtrar por Modulo", editable: 'onAdd' },
                             { title: 'Posicion', field: 'Posicion', filterPlaceHolder: "Filtrar por Posicion", editable: 'onAdd' },
+                            { title: 'Cantidad', field: 'Cantidad', filterPlaceHolder: "Cantidad", editable: 'onAdd' },
+                            
                           ]}
                             data={query=>new Promise((resolve, reject) => {
                               axios.get(url + '/' + rowData.Codigo).then((response)=>{
