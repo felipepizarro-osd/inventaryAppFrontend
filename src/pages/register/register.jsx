@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       
       [theme.breakpoints.down(500 + theme.spacing(2) + 2)]: {
-          marginTop: -200,
+          marginTop: -300,
           marginLeft: 'auto',
           width: '80%',
           height: '70%'
