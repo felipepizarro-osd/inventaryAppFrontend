@@ -5,7 +5,8 @@ import New from "./pages/new/New"
 import Stock from "./pages/stock/stock"
 import Agregarproveedor from "./pages/agregarproveedor/Agregarproveedor";
 import AgregarBodegas from "./pages/agregarBodegas/AgregarBodegas";
-
+import EditarBodegas from "./pages/editarBodegas/EditarBodegas";
+import EditarProveedor from "./pages/editarProveedor/EditarProveedor";
 
 import {
   BrowserRouter,
@@ -26,6 +27,8 @@ function App() {
             <Route path="login" element={<Login/>}/>
             <Route path="Agregarproveedor" element={<Agregarproveedor/>}/>
             <Route path="AgregarBodegas" element={<AgregarBodegas/>}/>
+            <Route path="EditarBodegas" element={<EditarBodegas/>}/>
+            <Route path="EditarProveedor" element={<EditarProveedor/>}/>
             <Route path="users">
               <Route index element={<AlmacenarEdit/>}/>
               <Route path=":userId" element={<Single/>}/>
