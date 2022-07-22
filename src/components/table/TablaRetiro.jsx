@@ -67,28 +67,7 @@ const tableIcons = {
   }))
 const TablaRetiro = () => {
 
-  const useStyles = {
-    position: "absolute",
-    padding: "12px 12px 12px",
-    backgroundColor: "white",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "20px",
-    
-  };
-
   const styles= useEstilos();
-
-  const prodStyles = {
-    borderBottom: "6px",
-    padding: "4px",
-  };
-  const colorStyles = {
-    backgroundColor: "#1b5a74",
-    color: "white",
-  };
-
   
   const columns=[
     {title:"Sku", field:"Sku"},
@@ -97,10 +76,10 @@ const TablaRetiro = () => {
     {title:"Part number", field:"Part_Number"},
     {title:"Stock", field:"Stock",searchable:false},
     {title:"Stock min", field:"Stock_min",searchable:false},
-    { title: 'Unidad', field: 'Unidad', sorting: false, filtering: false, searchable: false },
-    { title: 'Bodega', field: 'Bodega'},
-    { title: 'Modulo', field: 'Modulo'},
-    { title: 'Posicion', field: 'Posicion'},
+    {title: 'Unidad', field: 'Unidad', sorting: false, filtering: false, searchable: false },
+    {title: 'Bodega', field: 'Bodega'},
+    {title: 'Modulo', field: 'Modulo'},
+    {title: 'Posicion', field: 'Posicion'},
   ]
   const [products, setProducts] = useState([])
   const getData = async () => {
@@ -122,7 +101,7 @@ const TablaRetiro = () => {
 
   const [dato, setDato] = useState({ retiro: "" });
 
-  const [producto, setProductoSeleccionado]=useState({
+  const [productoSeleccionado, setProductoSeleccionado]=useState({
     sku: "",
     nombre:"",
     nombre_servicio:"",
@@ -132,10 +111,13 @@ const TablaRetiro = () => {
     unidad:"",
     bodega:"",
     modulo:"",
-    posicion:""
+    posicion:"",
+    retiro:""
   })
 
-  const seleccionarProducto=(producto)=>{
+  const seleccionarProducto=(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)=>{
+    console.log(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad,bodega,modulo,posicion)
+    let producto = {sku:sku,nombre:nombre,nombre_servicio:nombre_servicio,part_number:part_number,stock:stock,stock_min:stock_min,unidad:unidad,bodega:bodega,modulo:modulo,posicion:posicion}
     setProductoSeleccionado(producto);
     abrirCerrarModalR();
   }
@@ -152,30 +134,17 @@ const TablaRetiro = () => {
 
 
   const cambiarStock = async () => {
-    console.log(dato.retiro);
-    console.log(producto.stock);
-    producto.stock = parseInt(producto.stock) - parseInt(dato.retiro)
-    await axios.put("http://localhost:4000/api/products/"+producto.sku, producto)
-    .then(response=>{
-      var dataNueva= data;
-      dataNueva.map(producto=>{
-        if(producto.sku===producto.sku){
-          producto.sku=producto.sku;
-          producto.nombre=producto.nombre;
-          producto.nombre_servicio=producto.nombre_servicio;
-          producto.part_number=producto.part_number;
-          producto.stock=producto.stock;
-          producto.stock_min=producto.stock_min;
-          producto.unidad=producto.unidad;
-          producto.bodega=producto.bodega;
-          producto.modulo=producto.modulo;
-          producto.posicion=producto.posicion;
-        }
-      });
-      setData(dataNueva);
-      abrirCerrarModalR();
-    }).catch(error=>{
-      console.log(error);
+    console.log(dato.retiro[0]);
+    console.log(productoSeleccionado.stock);
+    console.log("STATE productoSeleccionado",productoSeleccionado)
+    productoSeleccionado.retiro = dato.retiro[0]
+    console.log(productoSeleccionado.retiro);
+    await axios.put('http://localhost:4000/api/products/retiro/' + productoSeleccionado.sku, productoSeleccionado).then((response) => {
+      const data = response.data
+      console.log(data);
+      getData()
+      console.log(response.status)
+
     })
 
   }
@@ -187,7 +156,7 @@ const TablaRetiro = () => {
       <TextField className={styles.inputMaterial} label="Cantidad" type="number" name="retiro" onChange={handleChange} value={dato&&dato.retiro}/>
       <br /><br />
       <div align="right">
-        <Button color="primary" onClick={()=>cambiarStock()}>Retirar</Button>
+        <Button color="primary" onClick={()=> new Promise((resolve, reject) =>{cambiarStock();setTimeout(() => resolve(), 500)})}>Retirar</Button>
         <Button onClick={()=>abrirCerrarModalR()}>Cancelar</Button>
       </div>
     </div>
@@ -209,7 +178,11 @@ const TablaRetiro = () => {
             {
               icon: () => <button>Retirar</button>,
               tooltip: "Retirar",
-              onClick: (event, rowData) => seleccionarProducto(rowData),
+              onClick: (event, rowData) => new Promise((resolve, reject) => 
+              { 
+                seleccionarProducto(rowData.Sku,rowData.Nombre,rowData.Nombre_Servicio,rowData.Part_Number,rowData.Stock,rowData.Stock_min,rowData.Unidad,rowData.Bodega,rowData.Modulo,rowData.Posicion);
+                setTimeout(() => resolve(), 500)
+              }),
               // isFreeAction:true
             }
           ]} />
