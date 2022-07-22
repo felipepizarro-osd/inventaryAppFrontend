@@ -7,14 +7,19 @@ import { Modal} from "@mui/material";
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import { useEffect } from 'react';
+import MaterialTable from 'material-table'
+import { forwardRef } from 'react';
+import swal from 'sweetalert';
+import Select from "react-select"
+import { Link } from "react-router-dom";
 
 // Bodega
 const AgregarBodega = () => {
-  const paperStyle={padding :20, height:'40vh',width:350, margin: "100px auto"}
+  const paperStyle={padding :20, height:350,width:350, margin: "100px auto"}
   const avatarStyle={backgroundColor: '#33A5FF'}
   const btnstyle={margin:'10px 0', backgroundColor: '#EA454C'}
   const usuarioStyle={margin: "10px auto"}
-
+  const paperStyle2={padding :20, height:200,width:350, margin: "100px auto"}
   //Editar
   const useStyles = {
     position: "absolute",
@@ -27,17 +32,19 @@ const AgregarBodega = () => {
   };
   
   //Conexion
-  const  [allBodegas,setallBodegas] = useState([]);
+  const  [allBodegas,setallBodegas] = useState({ Ubicacion: "" });
+  
+  
   
   useEffect(()=>{ 
     const getBodega = async ()=>{
       const response = await fetch('http://localhost:4000/api/Bodegas');
-      setallBodegas(await response.json());
+      setallBodegas(await response.json());      
     }
     getBodega();
   },[])
-
-  //Verificar SI existe el proveedor  
+  //=================================================================================================================================
+  //Verificar SI existe el la bodega  
   //Almaceno el nombre de la bodega
   const  [BodegaBuscada,setBodegaBuscada] = useState({ Ubicacion: "" });
   //busco la bodega y si no existe la agrego
@@ -63,7 +70,7 @@ const AgregarBodega = () => {
     searchBodega(dato.Ubicacion[0]);
     //searchBodega(dato.Ubicacion[0]); 
   };
-  
+  //===============================================================================================================================
   const [open, setOpen] = useState(false);
   //Al clickar el Boton Agregar Bodega 
   const handleClickOpen = () => {
@@ -85,7 +92,7 @@ const AgregarBodega = () => {
       [event.target.name]: [event.target.value.toUpperCase()],
     });
   };
-
+  //=================================================================================================================================
   const aceptado = (
     <div style={useStyles}>
       <h2>Ubicacion Guardada!!</h2>
@@ -108,12 +115,15 @@ const AgregarBodega = () => {
       </div>
     </div>
   );
-   
-
+  //=================================================================================================================================
+  //=================================================================================================================================
+  // Voy guardando la bodega ingresada por pantalla
+  // handleChange va guardando el dato ingresado en el datoBodega
+  //=================================================================================================================================
   return (
-    <div className='AgregarBodega'>
+    <div className='AgregarBodega' >
       <Sidebar/>
-      <div className='AgregarBodegaConteiner'>
+      <div className='AgregarBodegaConteiner'>     
         <Grid>
           <CssBaseline/>              
             <Paper elevation={10} style={paperStyle}> 
@@ -153,55 +163,30 @@ const AgregarBodega = () => {
               </div>      
             </Paper>            
         </Grid>
-      </div>
-
+      </div> 
       
-      <div className='EditarBodegaConteiner'>
+
+      <div className='AgregarBodegaConteiner'>     
         <Grid>
           <CssBaseline/>              
-            <Paper elevation={10} style={paperStyle}> 
+            <Paper elevation={10} style={paperStyle2}> 
               <Grid align = 'center'>
                 <Avatar style={avatarStyle}> <LibraryAddIcon/> </Avatar>
-                <h2>Agregar Bodega</h2>
+                <h2>Editar Bodegas</h2>
               </Grid>
-              <form onSubmit={enviarDato} align = 'center'>
-                <FormControl align = 'center'>
-                <TextField 
-                    label='Nombre Bodega a ediatar' 
-                    placeholder='Ingrese Ubicacion' 
-                    fullWidth required name='Ubicacion' 
-                    //onChange={handleChange} activar cuando este todo casi hecho
-                    style={usuarioStyle}/>
-                  <br /><br />
-                </FormControl>
-              </form>
-
-              {dato.Ubicacion[0] === BodegaBuscada.Ubicacion.toUpperCase() && (
-                console.log('1 dato:',dato.Ubicacion[0],' BodegaBuscada:',BodegaBuscada.Ubicacion.toUpperCase()))
-              }
-              {dato.Ubicacion[0] !== BodegaBuscada.Ubicacion.toUpperCase() && (
-                console.log('2 dato:',dato.Ubicacion[0],' BodegaBuscada:',BodegaBuscada.Ubicacion.toUpperCase()))
-              }
-              {dato.Ubicacion[0] === BodegaBuscada.Ubicacion.toUpperCase() &&(                
-                <Modal open={open} onClose={handleClickOpen}>                  
-                  {rechazado}
-                </Modal>
-              )}
-              {dato.Ubicacion[0] !== BodegaBuscada.Ubicacion.toUpperCase() &&  (
-                <Modal open={open} onClose={handleClickOpen}>
-                  {aceptado}
-                </Modal>
-              )}
-
+              <div className='BOTONLINK' style={{display: 'flex',  justifyContent:'center'}}> 
+                <Link to="/EditarBodegas" className="nav-link" >
+                  <Button type='submit'                     
+                    color='primary' variant='contained' 
+                    style={btnstyle} fullWidth >IR A EDITAR</Button>
+                </Link>
+              </div> 
               <div className='AgregarUbicacionInformacion'>   
               </div>      
             </Paper>            
         </Grid>
       </div>
     </div>
-
-
-
   )
 }
 

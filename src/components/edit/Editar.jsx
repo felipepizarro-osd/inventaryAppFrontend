@@ -54,6 +54,7 @@ const Editar = () => {
 
   const CreateProduct = async (newRow) => {
     setProduct(newRow)
+    console.log("Que es lo que guarda->",newRow)
 
     await axios.post(url, newRow).then((response) => {
       const data = response.data

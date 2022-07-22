@@ -27,13 +27,14 @@ const Agregarproveedor = () => {
     borderRadius: "20px",
   };
   
-  //Conexion
+  //Conexion console.log("AllProveedores",proveed[0].Nombre)
   const  [proveed,setProveedor] = useState([]);
   
   useEffect(()=>{ 
     const getProveedor = async ()=>{
       const response = await fetch('http://localhost:4000/api/proveedores');
       setProveedor(await response.json());
+      
     }
     getProveedor();
   },[])
@@ -115,6 +116,7 @@ const Agregarproveedor = () => {
     <div className='Agregarproveedor'>
       <Sidebar/>
       <div className='AgregarproveedorConteiner'>
+      {console.log("AllProveedores",proveed)}
         <Grid>
           <CssBaseline/>              
             <Paper elevation={10} style={paperStyle}> 
