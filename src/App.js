@@ -14,6 +14,7 @@ import {
   Routes,
 } from "react-router-dom";
 import AlmacenarEdit from "./pages/almacenar/almacenarEdit";
+import OrdenCompra from "./pages/OrdenCompra/OrdenCompra";
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route path="retirar_productos">
               <Route index element={<Retiro/>}/>
+            </Route>
+            <Route path="ingresar">
+              <Route index element={<OrdenCompra/>}/>
             </Route>
         </Routes>
       </BrowserRouter>
