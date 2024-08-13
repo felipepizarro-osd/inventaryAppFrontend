@@ -8,8 +8,6 @@ npm start
 ```
 ##menu de aplicaciones del software
 
-##recordar tener el backend corriendo para hacer el uso de la aplicacion necesarion estar con el backend ejecutando
-https://github.com/felipepizarro-osd/C19SoftwareInventaryAppBackend.git
 
 #Home Page buscar Productos
 ![home](https://user-images.githubusercontent.com/66143232/180619768-3de3a8b7-f772-4930-affd-9653716545fc.png)
